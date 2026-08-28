@@ -23,13 +23,39 @@ Result as of 2026-08-28:
 | Exercise demo / tutorial  |     46 | 11,588 |     54 |   252 |
 | Other                     |      4 |     96 |     18 |    24 |
 
+## Decisions (rev 2)
+
+| Question | Answer |
+|---|---|
+| Goal | Fill 1:1 coaching slots. Learn to Lift is the second-order outcome. |
+| Budget | $8/day (~$240/mo), read over 90 days. |
+| Control | Human approves every launch; the system pauses on its own. |
+| Access | Platform APIs, not a browser session. |
+
+Consequences of aiming at 1:1 on a trickle budget:
+
+- **Find Your Phase becomes a router, not a destination.** Improve/Compete phases
+  route to the 15-min call; Learn phase routes to nurture and Learn to Lift.
+- **Optimise on quiz completions, measure on booked calls.** Booked calls are far
+  too sparse at this budget to train Meta's optimiser (~50 conversions/week/ad set
+  is the working threshold).
+- **One ad set, not three.** $8/day split three ways starves all of them.
+- **Athlete competition clips move into retargeting** as the close layer; opinion
+  shorts stay top-of-funnel.
+- **The Governor gains a capacity switch** — ads pause when open slots hit zero.
+
 ## Status
 
-Plan only. No ad code, no credentials, no spend. Four decisions are open — see the
-"Before I build" section of the pitch.
+Plan only. No ad code, no credentials, no spend.
 
-## Not yet done
+## Open
 
-- Instagram-native metrics (saves, shares, follows, profile visits) — needs either
-  Instagram Graph API access or a local Chrome session.
+- 1:1 rate, average athlete tenure, and open slot count. The slot count configures
+  the capacity switch; the other two turn cost-per-signing into a payback figure.
+  Enabling the Stripe connector would cover the revenue side.
+
+## Not available during planning
+
+- Instagram-native metrics (saves, shares, profile visits) — resolved by the API
+  decision above; the Instagram Graph API returns these in Phase 01.
 - Revenue figures — the Stripe connector was not enabled for the planning session.

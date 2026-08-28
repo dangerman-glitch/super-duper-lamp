@@ -355,6 +355,29 @@
     .phase { grid-template-columns: 1fr; gap: 8px; }
     .phase-n span { display: inline; margin-left: 8px; }
   }
+
+  /* ---- resolved decisions ---- */
+  .settled {
+    background: var(--sunk);
+    border: 1px solid var(--rule);
+    padding: 16px 20px;
+    margin: 0 0 22px;
+  }
+  .settled dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; }
+  .settled dt {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    padding-top: 3px;
+    white-space: nowrap;
+  }
+  .settled dd { margin: 0; font-size: 0.95rem; font-weight: 600; }
+  @media (max-width: 480px) {
+    .settled dl { grid-template-columns: 1fr; gap: 2px; }
+    .settled dd { margin-bottom: 10px; }
+  }
 </style>
 
 <div class="wrap">
@@ -362,19 +385,40 @@
   <header class="masthead">
     <div class="kicker">
       <span class="brand">Myriad Weightlifting</span>
-      <span>Paid acquisition plan</span>
+      <span>Paid acquisition plan &middot; rev 2</span>
       <span>28 Aug 2026</span>
     </div>
     <h1>Stop making ads. Promote the posts that already won.</h1>
-    <p class="lede">You have 70 published videos and three years of free creative testing sitting unused. Eight of them carry 60% of your total views. The system I want to build finds those winners automatically and puts money behind them — Meta first, YouTube second.</p>
+    <p class="lede">You have 70 published videos and three years of free creative testing sitting unused. Eight of them carry 60% of your total views. The system finds those winners automatically and puts a small, steady amount of money behind them — pointed at 1:1 slots first, program sales second.</p>
   </header>
 
   <section>
-    <p class="eyebrow">First, a correction</p>
+    <p class="eyebrow">Settled</p>
+    <div class="settled">
+      <dl>
+        <dt>Goal</dt>
+        <dd>Fill 1:1 coaching slots. Learn to Lift sales are the second-order outcome, not the target.</dd>
+        <dt>Budget</dt>
+        <dd>$8/day &mdash; roughly $240/month &mdash; read over 90 days.</dd>
+        <dt>Control</dt>
+        <dd>You approve every launch. The machine pauses on its own.</dd>
+        <dt>Access</dt>
+        <dd>Platform APIs, not a browser session.</dd>
+      </dl>
+    </div>
+    <div class="body-col">
+      <p>These two decisions fit together better than either does alone. I flagged capacity as the risk in the first draft: buying demand for slots you cannot staff is the expensive mistake. A trickle budget is the answer to that. You are not opening a funnel, you are keeping a slow line of qualified people arriving while you have room — and when you do not have room, the system stops. That is a genuinely different machine from the one I pitched, and a smaller one.</p>
+      <p>It is also the better economics, with one caveat below. A 1:1 athlete paying monthly for a year or more is worth many multiples of a single program sale, so 1:1 can absorb a far higher cost per acquisition than Learn to Lift ever could. Chasing the cheaper conversion was optimising the wrong number.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">One limitation, now closing</p>
     <div class="notice">
       <p class="eyebrow">I could not use Chrome</p>
       <p>This session runs in a cloud container. The Claude in Chrome extension lives on your laptop, so I have no browser here and could not open Instagram or your Meta account. What I did instead: read your <strong>YouTube catalog sheet</strong>, your <strong>Notion social pipeline</strong>, and your <strong>Master Athlete Roster</strong> through the connectors. Stripe and Canva are installed but switched off for this chat, so there are no revenue figures below.</p>
-      <p>The gap that leaves: Instagram-native numbers — saves, shares, follows, profile visits — and the state of your ad account. Two ways to close it, and the second one you need anyway. Details at the end.</p>
+      <p>Going the API route closes this properly rather than patching it — the Instagram Graph API returns saves, shares and profile visits directly, and unattended nightly syncing needs that access anyway. So there is no Chrome walkthrough to schedule; Phase 01 just gets me the credentials.</p>
+      <p>The revenue gap is the one that stays open. Aiming at 1:1 means the plan turns on your coaching rate and how long an athlete stays — numbers I do not have. See the ask at the end.</p>
     </div>
   </section>
 
@@ -399,7 +443,7 @@
             <th scope="col">Total views</th>
             <th scope="col">Median</th>
             <th scope="col">Mean</th>
-            <th scope="col"><span class="visually-hidden">Share</span></th>
+            <th scope="col"><span class="visually-hidden">Relative reach</span></th>
           </tr>
         </thead>
         <tbody>
@@ -429,53 +473,77 @@
 
     <div class="body-col">
       <p>Your seven opinion shorts published in 2025 average <strong>5,624 views</strong>. Your 46 exercise demos have a median of <strong>54</strong>. That is not a content problem — the demos are coaching infrastructure, the library you link into Bridge so athletes know what a Kickstand RDL looks like. They do their job. They just are not reach, and it would be a mistake to treat the two as the same pile.</p>
-      <p>The single best-performing thing you have ever published is <em>&ldquo;Sift through the endless metrics&rdquo;</em> at <strong>25,593 views</strong> — four times your next best. It is a point of view, not a demonstration. So is <em>&ldquo;Which trap are you caught in?&rdquo;</em> (5,120) and <em>&ldquo;Miss a lift and go up?&rdquo;</em> (3,074). Your Notion pipeline is already full of this format: <em>Are belts cheating</em>, <em>Zombie squat &mdash; legit or meme lift?</em>, <em>No foot &mdash; good or bad?</em>. Written, unpublished, sitting there.</p>
+      <p>The single best-performing thing you have published is <em>&ldquo;Sift through the endless metrics&rdquo;</em> at <strong>25,593 views</strong> — four times your next best. It is a point of view, not a demonstration. So is <em>&ldquo;Which trap are you caught in?&rdquo;</em> (5,120) and <em>&ldquo;Miss a lift and go up?&rdquo;</em> (3,074). Your Notion pipeline is already full of this format: <em>Are belts cheating</em>, <em>Zombie squat &mdash; legit or meme lift?</em>, <em>No foot &mdash; good or bad?</em>. Written, unpublished, sitting there.</p>
     </div>
 
     <p class="pull">Organic view count is a free creative pretest. You have already run it 70 times. Ads should spend money only on the posts that passed.</p>
   </section>
 
   <section>
-    <p class="eyebrow">The strategic call</p>
-    <h2>Advertise Learn to Lift, not your 1:1 coaching</h2>
+    <p class="eyebrow">The redesign</p>
+    <h2>The quiz stops being the destination and becomes the sorter</h2>
     <div class="body-col">
-      <p>Your roster shows roughly <strong>45 athletes on named check-in days</strong>, Monday through Friday, plus about <strong>20 in the Bench group</strong>, and five more in Drive who are active in intake but not yet assigned a day. You are one coach. Buying traffic for 1:1 slots means paying to generate demand you cannot serve, and the fastest way to burn a coaching business is to accept athletes you do not have hours for.</p>
-      <p><strong>Learn to Lift</strong> — the 12-week beginner program — has no capacity ceiling. <strong>Find Your Phase</strong> is already the right cold CTA and already exists. So the funnel is built; nothing new needs inventing:</p>
+      <p>Pointing a cold ad straight at a booking page asks a stranger for a calendar slot before they know who you are. That is the wrong ask and it is against your whole anti-pressure posture. But <strong>Find Your Phase</strong> already solves it. The quiz sorts people by where they are — Learn, Improve, Compete — and that maps cleanly onto what you sell:</p>
     </div>
 
-    <div class="flow" role="img" aria-label="Funnel: a proven organic post becomes a paid ad, which drives cold traffic to the Find Your Phase quiz, then into email nurture, which sells Learn to Lift; a small share of that audience books a fifteen-minute call for one-to-one coaching.">
-      <svg viewBox="0 0 760 128" xmlns="http://www.w3.org/2000/svg">
+    <div class="flow" role="img" aria-label="Funnel: a proven organic post becomes a paid ad driving cold traffic to the Find Your Phase quiz. The quiz routes people two ways: those in the Improve or Compete phase go to a fifteen-minute call and one-to-one coaching, the primary goal; those in the Learn phase go to email nurture and Learn to Lift, the secondary outcome.">
+      <svg viewBox="0 0 760 176" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <marker id="ah" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <marker id="ah2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
             <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rule-strong)"/>
           </marker>
+          <marker id="ah2a" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--accent)"/>
+          </marker>
         </defs>
-        <g fill="none" stroke="currentColor" color="var(--rule-strong)" stroke-width="1.4" marker-end="url(#ah)">
-          <path d="M132,44 H166"/><path d="M270,44 H304"/><path d="M408,44 H442"/><path d="M546,44 H580"/>
-          <path d="M494,62 V96 H580" stroke-dasharray="3 4"/>
+        <g fill="none" stroke="var(--rule-strong)" stroke-width="1.4" marker-end="url(#ah2)">
+          <path d="M132,60 H166"/><path d="M270,60 H304"/>
+          <path d="M408,60 V128 H442"/><path d="M546,128 H580"/>
+        </g>
+        <g fill="none" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#ah2a)">
+          <path d="M408,42 V30 H442"/><path d="M546,30 H580"/>
         </g>
         <g>
-          <rect x="2" y="24" width="130" height="40" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
-          <rect x="168" y="24" width="102" height="40" fill="var(--surface)" stroke="var(--rule-strong)"/>
-          <rect x="306" y="24" width="102" height="40" fill="var(--surface)" stroke="var(--rule-strong)"/>
-          <rect x="444" y="24" width="102" height="40" fill="var(--surface)" stroke="var(--rule-strong)"/>
-          <rect x="582" y="24" width="176" height="40" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
-          <rect x="582" y="76" width="176" height="40" fill="var(--sunk)" stroke="var(--rule-strong)" stroke-dasharray="3 4"/>
+          <rect x="2" y="40" width="130" height="40" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+          <rect x="168" y="40" width="102" height="40" fill="var(--surface)" stroke="var(--rule-strong)"/>
+          <rect x="306" y="40" width="102" height="40" fill="var(--surface)" stroke="var(--rule-strong)"/>
+          <rect x="444" y="10" width="102" height="40" fill="var(--surface)" stroke="var(--accent)" stroke-width="1.2"/>
+          <rect x="582" y="10" width="176" height="40" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.8"/>
+          <rect x="444" y="108" width="102" height="40" fill="var(--surface)" stroke="var(--rule-strong)"/>
+          <rect x="582" y="108" width="176" height="40" fill="var(--sunk)" stroke="var(--rule-strong)"/>
         </g>
         <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--ink)" text-anchor="middle">
-          <text x="67" y="41">Proven post</text><text x="67" y="54" fill="var(--steel)">top 10% organic</text>
-          <text x="219" y="48">Paid ad</text>
-          <text x="357" y="41">Find Your</text><text x="357" y="54">Phase quiz</text>
-          <text x="495" y="48">Email nurture</text>
-          <text x="670" y="48" font-weight="600">Learn to Lift</text>
-          <text x="670" y="94">15-min call &rarr; 1:1</text>
-          <text x="670" y="107" fill="var(--steel)">only when you have room</text>
+          <text x="67" y="57">Proven post</text><text x="67" y="70" fill="var(--steel)">top 10% organic</text>
+          <text x="219" y="64">Paid ad</text>
+          <text x="357" y="57">Find Your</text><text x="357" y="70">Phase quiz</text>
+          <text x="495" y="34">15-min call</text>
+          <text x="670" y="28" font-weight="600" fill="var(--accent)">1:1 coaching</text>
+          <text x="670" y="41" fill="var(--steel)">the goal</text>
+          <text x="495" y="132">Email nurture</text>
+          <text x="670" y="126">Learn to Lift</text>
+          <text x="670" y="139" fill="var(--steel)">second, and it waits</text>
+        </g>
+        <g font-family="IBM Plex Mono, monospace" font-size="9" fill="var(--steel)">
+          <text x="414" y="26">Improve / Compete</text>
+          <text x="414" y="102">Learn</text>
         </g>
       </svg>
     </div>
 
     <div class="body-col">
-      <p>The dotted path stays open, but it is a valve you control — not the thing the budget chases. When you have a slot, you turn it on.</p>
+      <p>Nobody is asked to buy anything cold. They answer a few questions about their own lifting, and the ones who are already training seriously get offered a conversation. Everyone else goes into the nurture sequence and stays there until they are ready. Learn to Lift keeps earning quietly in the background — it is second in priority, not switched off.</p>
+      <p><strong>The creative mix changes with it.</strong> Opinion shorts still do the cold work; they are what earns reach. But your <em>athlete competition clips</em> — mean 1,216 views, a smaller and much more qualified audience — become the retargeting layer. Someone weighing up whether you can coach them onto a platform should see Kevin's 12&nbsp;kg competition PR and Eddie at Worlds. In rev 1 those clips were a footnote. Now they carry the close.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">One technical consequence</p>
+    <h2>A trickle budget cannot optimise on booked calls</h2>
+    <div class="body-col">
+      <p>This is the one real cost of the two decisions, and it is worth understanding before we start rather than discovering it in week five.</p>
+      <p>Meta's optimiser learns by watching conversions. It needs something on the order of <strong>50 per week per ad set</strong> to work properly. At $8/day aimed at booked calls, you might see a handful a month — nowhere near enough. Point the optimiser at booked calls and it never learns; it will spend your money close to randomly.</p>
+      <p>The fix is standard and it works: <strong>optimise on quiz completions, measure on booked calls.</strong> Quiz completions are frequent and cheap enough to be a real training signal. Booked calls are what we actually judge the system by. The two are wired separately — the machine steers by the first number, you and I read the second.</p>
+      <p>Two smaller consequences of the same arithmetic. <strong>One ad set, not three</strong> — splitting $8/day three ways starves all of them, so cold targeting runs alone until volume justifies a split. And <strong>90 days, not 60</strong> — a slower trickle needs longer before the numbers mean anything. Judging this at week four would be reading noise.</p>
     </div>
   </section>
 
@@ -497,11 +565,12 @@
       </div>
       <div class="card">
         <h3>Governor</h3>
-        <p>Auto-pauses any ad whose cost per quiz completion crosses your ceiling, enforces the daily cap, and files a weekly report. This half runs with no approval — stopping spend is always safe.</p>
+        <p>Enforces the daily cap, auto-pauses anything above your cost ceiling, and &mdash; new in this revision &mdash; <strong>pauses everything when your slots are full</strong>. Stopping spend never needs approval.</p>
       </div>
     </div>
     <div class="body-col" style="margin-top:22px">
-      <p><strong>Where you sit in it:</strong> once a week you get a short list — <em>&ldquo;these three posts earned promotion, approve?&rdquo;</em> Launching costs money, so a human says yes. Pausing saves money, so the machine does it alone. That asymmetry is the whole safety design.</p>
+      <p><strong>The capacity switch is the important addition.</strong> You tell the system how many open slots you have. It counts booked calls against that number and shuts the ads off when you are full, then turns them back on when someone finishes a block or moves on. This is what makes aiming at 1:1 safe rather than reckless — the machine physically cannot generate more demand than you have room for.</p>
+      <p><strong>Where you sit in it,</strong> as decided: once a week you get a short list — <em>&ldquo;these three posts earned promotion, approve?&rdquo;</em> Launching costs money, so you say yes. Pausing saves money, so the machine does it alone, with no approval and no delay.</p>
     </div>
   </section>
 
@@ -513,8 +582,8 @@
       <div class="phase-n">Phase 01<span>Weeks 1–2</span></div>
       <div class="phase-body">
         <h3>Plumbing</h3>
-        <p>Meta Business verification and app access for the Marketing API — the slowest step, so it starts first. Pixel plus Conversions API on the quiz, with quiz completion as the conversion event. Supabase schema. Google Ads and YouTube API credentials requested now so Phase 04 is not waiting on paperwork.</p>
-        <p class="ships"><b>Ships:</b> a test conversion firing end-to-end, tables live, credentials in hand.</p>
+        <p>Meta Business verification and app access for the Marketing API — the slowest step, so it starts first. Pixel plus Conversions API on the quiz, with two events wired separately: quiz completion for the optimiser, booked call for the scoreboard. Supabase schema, including the open-slots table the capacity switch reads. Instagram Graph, Google Ads and YouTube credentials all requested in this phase so nothing downstream waits on paperwork.</p>
+        <p class="ships"><b>Ships:</b> both conversion events firing end-to-end, tables live, credentials in hand.</p>
       </div>
     </div>
 
@@ -522,7 +591,7 @@
       <div class="phase-n">Phase 02<span>Week 3</span></div>
       <div class="phase-body">
         <h3>Collector and scorer</h3>
-        <p>Nightly sync running. Full backfill of the YouTube catalog and your Instagram history. First real output: one ranked table of every post you have ever published, scored the same way, which is a thing you have never had.</p>
+        <p>Nightly sync running. Full backfill of the YouTube catalog and your Instagram history. First real output: one ranked table of every post you have ever published, scored the same way — a thing you have never had. Athlete clips get tagged separately here so the retargeting layer can draw from them.</p>
         <p class="ships"><b>Ships:</b> the ranking, and the first weekly shortlist for you to react to — no spend yet.</p>
       </div>
     </div>
@@ -531,17 +600,17 @@
       <div class="phase-n">Phase 03<span>Weeks 4–6</span></div>
       <div class="phase-body">
         <h3>Meta goes live</h3>
-        <p>One campaign, conversion objective, quiz completion. Three ad sets to separate cold interest targeting from lookalikes built off quiz finishers from a warm retargeting pool. Seed creative is your existing winners — <em>Sift through the endless metrics</em> first. Governor rules switched on before the first dollar, not after.</p>
-        <p class="ships"><b>Ships:</b> live spend at roughly $15/day, auto-pause armed, weekly report landing in your inbox.</p>
+        <p>One campaign, one cold ad set, optimising on quiz completion. Seed creative is your existing opinion winners — <em>Sift through the endless metrics</em> first. Quiz routing goes live at the same time: Improve and Compete phases get the call offer, Learn phase enters nurture. Governor rules including the capacity switch are armed before the first dollar, not after.</p>
+        <p class="ships"><b>Ships:</b> live spend at $8/day, auto-pause and slot ceiling armed, weekly report landing in your inbox.</p>
       </div>
     </div>
 
     <div class="phase">
       <div class="phase-n">Phase 04<span>Weeks 7–10</span></div>
       <div class="phase-body">
-        <h3>YouTube</h3>
-        <p>Google Ads Video Action campaigns against the same scoring layer and the same quiz conversion — the collector and scorer are already built, so this phase is mostly the promoter learning a second API. Budget splits only after Meta has a cost-per-quiz number worth beating.</p>
-        <p class="ships"><b>Ships:</b> two channels on one scoring engine, one report covering both.</p>
+        <h3>Retargeting, then YouTube</h3>
+        <p>Athlete competition clips go up as a retargeting layer against quiz finishers who did not book — this is the cheapest available lift and it comes before any new channel. Then Google Ads Video Action campaigns on the same scoring layer and the same events. Budget only splits toward YouTube once Meta has a cost-per-call number worth beating.</p>
+        <p class="ships"><b>Ships:</b> the close layer, then two channels on one scoring engine and one report.</p>
       </div>
     </div>
   </section>
@@ -550,36 +619,25 @@
     <p class="eyebrow">Money and measurement</p>
     <h2>What it costs and how we know it worked</h2>
     <div class="body-col">
-      <p>Start at <strong>$15/day, about $450/month</strong>, for a 60-day read. That is enough volume to learn something and small enough that a bad month is not a real wound. Infrastructure is effectively free — Supabase and Zapier are already on your account.</p>
+      <p><strong>$8/day, about $240/month, read over 90 days</strong> — roughly $720 all in. Infrastructure is effectively free; Supabase and Zapier are already on your account. That is a small enough number that a dead quarter is an annoyance rather than a problem, which is the point of a trickle.</p>
       <p>Three metrics, in order. Do not skip ahead:</p>
       <ul class="plain">
-        <li><strong>Cost per quiz completion</strong> — the only number that matters in month one. Below $4 and the machine is working.</li>
-        <li><strong>Quiz &rarr; Learn to Lift conversion rate</strong> — measured in month two. If traffic is cheap but nobody buys, the problem is the nurture sequence, not the ads, and we fix that before adding budget.</li>
-        <li><strong>Cost per sale against program price</strong> — the number that decides whether this scales past $450/month or gets switched off.</li>
+        <li><strong>Cost per quiz completion</strong> — the optimiser's steering signal, not a business result. Under $4 means delivery is healthy.</li>
+        <li><strong>Quiz &rarr; booked call rate</strong> — the number that tells us whether the routing works. If quizzes are cheap but nobody in the Improve or Compete phase books, the problem is the offer or the routing, not the ads, and we fix that before touching budget.</li>
+        <li><strong>Cost per signed athlete, against what an athlete is worth to you</strong> — the only number that decides whether this continues. It needs your rate and your average tenure, which I do not have.</li>
       </ul>
-      <p>Honest risks, stated up front. Meta Business verification can take two weeks and is outside my control. Attribution on a quiz-to-email-to-purchase path is genuinely fuzzy, so treat month one as directional. And there is a real chance the answer is <em>no</em> — that paid traffic to a beginner program does not pay for itself at your price. A $900 two-month test is the cheapest way to find that out, and finding it out is a legitimate result.</p>
+      <p><strong>The maths I cannot do yet.</strong> If an athlete pays monthly and stays a year, their lifetime value is large enough that even a few hundred dollars of ad spend per signing pays back quickly — and at $240/month the ceiling on damage is low regardless. But that is an argument, not a calculation, until I have the two numbers in the last ask below.</p>
+      <p>Honest risks. Meta Business verification can take two weeks and is outside my control. A trickle budget means slow, noisy data — expect to feel impatient around week six and resist acting on it. And there is a real chance the answer is <em>no</em>: that cold paid traffic does not produce 1:1 athletes at any price that makes sense. $720 over a quarter is a cheap way to find that out, and finding it out is a legitimate result.</p>
     </div>
   </section>
 
   <section>
     <p class="eyebrow">Before I build</p>
-    <h2>Four things I need from you</h2>
+    <h2>One thing I still need</h2>
     <ol class="asks">
       <li>
-        <span class="q">Is Learn to Lift the destination?</span>
-        <span class="a">My recommendation, on the capacity argument above. Say the word if you would rather fill 1:1 slots and I will rebuild the funnel around the 15-minute call — but then we cap spend hard, because demand you cannot serve is worse than no demand.</span>
-      </li>
-      <li>
-        <span class="q">Confirm the budget.</span>
-        <span class="a">$15/day for 60 days is what I have planned against. Higher gets a faster read; lower stretches the learning period past the point of usefulness.</span>
-      </li>
-      <li>
-        <span class="q">How much rope does the machine get?</span>
-        <span class="a">I have planned for: you approve every launch, it pauses on its own. The alternative is full autopilot above a score threshold. I would not do that until we have three months of data.</span>
-      </li>
-      <li>
-        <span class="q">API access, or Chrome on your laptop?</span>
-        <span class="a">API access is the real answer — the system needs it regardless, and it is what makes any of this run unattended. If you want the Instagram-native read first, run me in Claude Code on your desktop with the Chrome extension and I will do the walkthrough I could not do here.</span>
+        <span class="q">How many open 1:1 slots, and what is the rate?</span>
+        <span class="a">The slot count sets the capacity switch — it is a number the system needs on day one. The rate, plus roughly how long an athlete stays, is what turns cost-per-signing into an actual payback figure instead of an assertion. Enabling the Stripe connector would let me pull the revenue side myself.</span>
       </li>
     </ol>
   </section>
@@ -587,12 +645,12 @@
   <section>
     <p class="eyebrow">One more thing</p>
     <div class="body-col">
-      <p>Your catalog's last entry is dated <strong>29 December 2025</strong>. Either the sheet stopped being updated or publishing slowed down over the last eight months — I cannot tell which from here, and it matters. This system amplifies proven posts. It needs a supply of new ones to prove. Your Notion pipeline has a dozen written and unpublished, so the raw material is there.</p>
+      <p>Your catalog's last entry is dated <strong>29 December 2025</strong>. Either the sheet stopped being updated or publishing slowed down over the last eight months — I cannot tell which from here, and it matters more at a trickle budget, not less. A small ad spend leans harder on the organic side to keep supplying proven winners. Your Notion pipeline has a dozen written and unpublished, so the raw material is there.</p>
     </div>
   </section>
 
   <footer>
-    Prepared for Dan German &middot; Myriad Weightlifting / Dangerman OWL<br>
+    Prepared for Dan German &middot; Myriad Weightlifting / Dangerman OWL &middot; Revision 2<br>
     Sources: YouTube catalog sheet, Master Athlete Roster, Notion Social Media page &mdash; read 28 Aug 2026.<br>
     No Stripe revenue data; connector not enabled for this session.
   </footer>
