@@ -1,0 +1,608 @@
+<title>Meta Setup Walkthrough</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+  :root {
+    --ground: #f3f4f1;
+    --surface: #ffffff;
+    --sunk: #eaebe7;
+    --ink: #14181c;
+    --steel: #59636c;
+    --rule: #d8dbd7;
+    --rule-strong: #b9bfb9;
+    --accent: #a8302a;
+    --accent-soft: #f2e2e0;
+    --warn: #8a6413;
+    --warn-soft: #f5ecd8;
+    --good: #2f6647;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0f1317;
+      --surface: #161b20;
+      --sunk: #12171b;
+      --ink: #e5e7e4;
+      --steel: #939da5;
+      --rule: #293037;
+      --rule-strong: #3d464e;
+      --accent: #e2685c;
+      --accent-soft: #331c1a;
+      --warn: #d2a545;
+      --warn-soft: #2a2416;
+      --good: #6fb28c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0f1317;
+    --surface: #161b20;
+    --sunk: #12171b;
+    --ink: #e5e7e4;
+    --steel: #939da5;
+    --rule: #293037;
+    --rule-strong: #3d464e;
+    --accent: #e2685c;
+    --accent-soft: #331c1a;
+    --warn: #d2a545;
+    --warn-soft: #2a2416;
+    --good: #6fb28c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 24px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 780px; margin: 0 auto; }
+
+  /* ---- type scale ---- */
+  h1, h2, h3, .eyebrow, .stat-n, table, .mono { font-family: Archivo, "Helvetica Neue", Arial, sans-serif; }
+
+  h1 {
+    font-size: clamp(2.1rem, 5.2vw, 3.1rem);
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1.04;
+    text-wrap: balance;
+    margin: 0 0 18px;
+  }
+  h2 {
+    font-size: clamp(1.32rem, 2.9vw, 1.62rem);
+    font-weight: 700;
+    letter-spacing: -0.018em;
+    line-height: 1.18;
+    text-wrap: balance;
+    margin: 0 0 14px;
+  }
+  h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 0 0 8px;
+  }
+  p { margin: 0 0 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.71rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin: 0 0 10px;
+  }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+
+  .lede {
+    font-size: 1.13rem;
+    color: var(--steel);
+    max-width: 62ch;
+  }
+
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---- header ---- */
+  header.masthead {
+    padding: 72px 0 34px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .kicker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    align-items: baseline;
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.71rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 26px;
+  }
+  .kicker .brand { color: var(--accent); font-weight: 600; }
+
+  /* ---- sections ---- */
+  section { padding: 46px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: 0; }
+  .body-col { max-width: 66ch; }
+
+  /* ---- notice ---- */
+  .notice {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: 18px 22px;
+    margin: 0 0 8px;
+  }
+  .notice .eyebrow { color: var(--warn); margin-bottom: 8px; }
+  .notice p { font-size: 0.96rem; }
+
+  /* ---- data table ---- */
+  .table-scroll { overflow-x: auto; margin: 6px 0 14px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.87rem;
+    font-variant-numeric: tabular-nums;
+    min-width: 520px;
+  }
+  caption {
+    caption-side: bottom;
+    text-align: left;
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--steel);
+    padding-top: 12px;
+    line-height: 1.5;
+  }
+  th, td { padding: 9px 12px; text-align: right; }
+  th:first-child, td:first-child { text-align: left; padding-left: 0; }
+  th:last-child, td:last-child { padding-right: 0; }
+  thead th {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    border-bottom: 1px solid var(--rule-strong);
+    white-space: nowrap;
+  }
+  tbody td { border-bottom: 1px solid var(--rule); }
+  tbody tr:last-child td { border-bottom: 1px solid var(--rule-strong); }
+  tbody th {
+    text-align: left;
+    font-weight: 600;
+    padding-left: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  tr.hero td, tr.hero th { color: var(--accent); }
+  .bar {
+    display: block;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 1px;
+    min-width: 2px;
+  }
+  .bar.dim { background: var(--rule-strong); }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  td.barcell { width: 34%; padding-left: 18px; }
+
+  /* ---- stat row ---- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 8px 0 22px;
+  }
+  .stat { background: var(--surface); padding: 18px 18px 16px; }
+  .stat-n {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    display: block;
+    line-height: 1.1;
+  }
+  .stat-n.accent { color: var(--accent); }
+  .stat-l {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.67rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    display: block;
+    margin-top: 7px;
+    line-height: 1.45;
+  }
+
+  /* ---- pull ---- */
+  .pull {
+    font-size: 1.24rem;
+    line-height: 1.45;
+    font-weight: 600;
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 22px;
+    margin: 26px 0;
+    max-width: 54ch;
+    text-wrap: balance;
+  }
+
+  /* ---- phases ---- */
+  .phase {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 0 22px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .phase:first-of-type { border-top: 1px solid var(--rule-strong); }
+  .phase-n {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-top: 3px;
+    line-height: 1.5;
+  }
+  .phase-n span { display: block; color: var(--steel); font-weight: 400; letter-spacing: 0.04em; }
+  .phase-body p { font-size: 0.97rem; }
+  .ships {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.76rem;
+    color: var(--steel);
+    margin-top: 10px;
+    line-height: 1.55;
+  }
+  .ships b { color: var(--ink); font-weight: 600; }
+
+  /* ---- cards ---- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin: 8px 0 4px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 20px;
+  }
+  .card p { font-size: 0.93rem; color: var(--steel); margin: 0; }
+  .card h3 { margin-bottom: 7px; }
+
+  /* ---- lists ---- */
+  ul.plain { list-style: none; padding: 0; margin: 0 0 16px; }
+  ul.plain li {
+    padding: 11px 0 11px 26px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    font-size: 0.97rem;
+  }
+  ul.plain li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 21px;
+    width: 12px;
+    height: 2px;
+    background: var(--accent);
+  }
+  ul.plain li:last-child { border-bottom: 0; }
+
+  ol.asks { padding-left: 0; list-style: none; counter-reset: ask; margin: 0; }
+  ol.asks li {
+    counter-increment: ask;
+    padding: 16px 0 16px 44px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  ol.asks li::before {
+    content: counter(ask, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 17px;
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  ol.asks li:last-child { border-bottom: 0; }
+  ol.asks .q { font-weight: 600; display: block; margin-bottom: 4px; }
+  ol.asks .a { font-size: 0.93rem; color: var(--steel); }
+
+  /* ---- flow diagram ---- */
+  .flow { margin: 10px 0 8px; }
+  .flow svg { display: block; width: 100%; height: auto; }
+
+  footer {
+    padding: 40px 0 0;
+    border-top: 2px solid var(--ink);
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--steel);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; padding: 0 18px 64px; }
+    .phase { grid-template-columns: 1fr; gap: 8px; }
+    .phase-n span { display: inline; margin-left: 8px; }
+  }
+
+  /* ---- resolved decisions ---- */
+  .settled {
+    background: var(--sunk);
+    border: 1px solid var(--rule);
+    padding: 16px 20px;
+    margin: 0 0 22px;
+  }
+  .settled dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; }
+  .settled dt {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    padding-top: 3px;
+    white-space: nowrap;
+  }
+  .settled dd { margin: 0; font-size: 0.95rem; font-weight: 600; }
+  @media (max-width: 480px) {
+    .settled dl { grid-template-columns: 1fr; gap: 2px; }
+    .settled dd { margin-bottom: 10px; }
+  }
+
+  /* ---- setup walkthrough ---- */
+  .step {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 0 20px;
+    padding: 26px 0;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .step:first-of-type { border-top: 1px solid var(--rule-strong); }
+  .step-n {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent);
+    padding-top: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+  .step h3 { margin-bottom: 10px; font-size: 1.06rem; }
+  .step p, .step li { font-size: 0.97rem; }
+  .where {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.76rem;
+    color: var(--steel);
+    margin: 0 0 12px;
+    word-break: break-word;
+  }
+  .where a { color: var(--accent); }
+
+  .fields { margin: 14px 0 4px; border: 1px solid var(--rule); background: var(--surface); }
+  .fields dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+  }
+  .fields dt, .fields dd {
+    margin: 0;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.87rem;
+  }
+  .fields dt {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--steel);
+    white-space: nowrap;
+    background: var(--sunk);
+  }
+  .fields dd { font-weight: 600; }
+  .fields dl > :nth-last-child(-n+2) { border-bottom: 0; }
+  @media (max-width: 520px) {
+    .fields dl { grid-template-columns: 1fr; }
+    .fields dt { border-bottom: 0; padding-bottom: 2px; background: none; }
+    .step { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  .stop {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 14px 18px;
+    margin: 16px 0 4px;
+    font-size: 0.93rem;
+  }
+  .stop b { display: block; margin-bottom: 4px; font-size: 0.72rem;
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    letter-spacing: 0.1em; text-transform: uppercase; }
+  code {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.87em;
+    background: var(--sunk);
+    padding: 1px 5px;
+    border: 1px solid var(--rule);
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span class="brand">Dangerman Training Systems</span>
+      <span>Meta setup walkthrough</span>
+      <span>28 Aug 2026</span>
+    </div>
+    <h1>Set up Meta yourself, in about an hour</h1>
+    <p class="lede">I have no browser in this session, so I cannot click through this with you — but every field below is filled in with the values this plan actually needs. Work top to bottom with Chrome open. Step 2 is the one that takes days, so start it and let it run.</p>
+  </header>
+
+  <section>
+    <p class="eyebrow">Read this before you click anything</p>
+    <div class="stop">
+      <b>The decision that is hard to undo</b>
+      Create all of this under a <strong>new Business Portfolio for Dangerman Training Systems</strong> — not your personal account, and not Myriad's. You have said you may break off on your own. If the pixel, the ad account and the audiences live under the gym's portfolio, you hand them back on the way out, along with every retargeting audience you spent money building. Starting a separate portfolio today costs you ten minutes. Migrating one later is painful and sometimes impossible.
+    </div>
+    <div class="body-col" style="margin-top:18px">
+      <p>One honest caveat about what follows: Meta renames things constantly. I have described each step by <em>where you are going and what it must end up saying</em> rather than promising an exact button label. If a label differs, the destination and the values are still right. If something genuinely does not match, tell me what you see and I will work it out with you.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The sequence</p>
+    <h2>Seven steps, one of which is just waiting</h2>
+
+    <div class="step">
+      <div class="step-n">01</div>
+      <div>
+        <h3>Create the business portfolio</h3>
+        <p class="where"><a href="https://business.facebook.com/">business.facebook.com</a> → Business settings → Business portfolios → Create</p>
+        <p>If you already have one for the gym, create a second one anyway. Use your own email as the admin, not a shared gym address.</p>
+        <div class="fields"><dl>
+          <dt>Name</dt><dd>Dangerman Training Systems</dd>
+          <dt>Your name</dt><dd>Dan German</dd>
+          <dt>Business email</dt><dd>An address you control personally</dd>
+        </dl></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">02</div>
+      <div>
+        <h3>Start business verification — do this first, then walk away</h3>
+        <p class="where">Business settings → Security Center → Start verification</p>
+        <p>This is the long pole. Review can take a few days to two weeks and nothing downstream is fully unblocked until it clears. Meta wants documents proving the business is real: registration or formation paperwork, an EIN letter, a utility bill or bank statement showing the business name and address. The name on your documents must match the portfolio name exactly — a mismatch is the single most common rejection.</p>
+        <div class="stop">
+          <b>If you are a sole proprietor with no LLC</b>
+          Verification is harder without formation documents. You can often still get an ad account running for manual campaigns while unverified; it is the API access in step 7 that really needs it. If you hit a wall here, tell me and we will sequence around it rather than stall.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">03</div>
+      <div>
+        <h3>Connect the Instagram account and Facebook Page</h3>
+        <p class="where">Business settings → Accounts → Instagram accounts / Pages → Add</p>
+        <p>Add the Dangerman OWL Instagram and the associated Page to this portfolio. This is what later lets the system read saves, shares and profile visits — the numbers I have never been able to see — and what lets ads run as your brand rather than an anonymous advertiser.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">04</div>
+      <div>
+        <h3>Create the ad account</h3>
+        <p class="where">Business settings → Accounts → Ad accounts → Create</p>
+        <div class="stop">
+          <b>Currency and time zone are permanent</b>
+          These two cannot be changed after creation. Getting them wrong means creating a second ad account and losing the spend history. Set them deliberately.
+        </div>
+        <div class="fields"><dl>
+          <dt>Name</dt><dd>Dangerman Training Systems — Remote</dd>
+          <dt>Currency</dt><dd>USD</dd>
+          <dt>Time zone</dt><dd>America/Indiana/Indianapolis</dd>
+          <dt>Used for</dt><dd>My own business</dd>
+        </dl></div>
+        <p style="margin-top:14px">Then add a payment method under Billing. Set an <strong>account spending limit of $150</strong> while we are testing — a hard ceiling Meta will not cross even if something is misconfigured. Raise it later when the numbers justify it.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">05</div>
+      <div>
+        <h3>Create the pixel and put it on the quiz</h3>
+        <p class="where">Events Manager → Connect data sources → Web → Create</p>
+        <p>Name it <code>Dangerman Remote</code>. Meta will give you a base code snippet and a dataset ID. The snippet goes in the <code>&lt;head&gt;</code> of every page of the Find Your Phase quiz and the booking page.</p>
+        <p>How you install it depends on what the quiz is built on — if it is Typeform, Squarespace, Kajabi or similar there is usually a "tracking code" or "custom header" box that takes it directly. Tell me the platform and I will give you the exact placement.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">06</div>
+      <div>
+        <h3>Define the two events</h3>
+        <p class="where">Events Manager → your dataset → Custom conversions (or Aggregated Event Measurement)</p>
+        <p>Two events, wired separately, because they do different jobs. The first is what the optimiser steers on — it needs to fire often enough to train. The second is the actual scoreboard.</p>
+        <div class="fields"><dl>
+          <dt>Event 1</dt><dd><code>quiz_completed</code> — fires on the quiz results page</dd>
+          <dt>Purpose</dt><dd>Optimisation signal. This is what the campaign optimises for.</dd>
+          <dt>Event 2</dt><dd><code>call_booked</code> — fires on the booking confirmation page</dd>
+          <dt>Purpose</dt><dd>Measurement only. Never set this as the optimisation event.</dd>
+        </dl></div>
+        <p style="margin-top:14px">If the quiz can pass the result through, add the phase (<code>learn</code>, <code>improve</code>, <code>compete</code>) as a parameter on <code>quiz_completed</code>. That is what lets the routing send Improve and Compete to the call and Learn to nurture — and later it tells us which phase actually converts, which is worth knowing.</p>
+        <p><strong>Verify before moving on.</strong> Install the Meta Pixel Helper Chrome extension, take the quiz yourself, and confirm both events fire green. A campaign optimising against an event that never fires will spend your money and teach us nothing.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">07</div>
+      <div>
+        <h3>Create the API app — the part that lets me automate it</h3>
+        <p class="where"><a href="https://developers.facebook.com/apps">developers.facebook.com/apps</a> → Create app → Business → link it to the Dangerman portfolio</p>
+        <p>Everything to this point gets you a working manual ad account. This step is what lets the system read performance and launch approved winners without you in the Ads Manager UI.</p>
+        <p>Add the <strong>Marketing API</strong> product. Then, back in Business settings → Users → System users, create a system user with admin access to the ad account and generate a token with these scopes:</p>
+        <div class="fields"><dl>
+          <dt>Scopes</dt><dd><code>ads_management</code>, <code>ads_read</code>, <code>business_management</code>, <code>instagram_basic</code>, <code>instagram_manage_insights</code>, <code>pages_read_engagement</code></dd>
+          <dt>Token type</dt><dd>System user token, never-expiring</dd>
+        </dl></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">When you are done</p>
+    <h2>Four values to send me</h2>
+    <div class="body-col">
+      <ul class="plain">
+        <li><strong>Ad account ID</strong> — starts <code>act_</code></li>
+        <li><strong>Pixel / dataset ID</strong> — a long number from Events Manager</li>
+        <li><strong>Business portfolio ID</strong></li>
+        <li><strong>Instagram account handle</strong> connected in step 3</li>
+      </ul>
+      <div class="stop">
+        <b>Not the token</b>
+        Send the four IDs above in chat, but <strong>do not paste the system user token here</strong>. It is a permanent credential with spending authority over your ad account, and this conversation is stored. Put it in an environment variable or a secrets manager and tell me the variable name. If you have already pasted one anywhere, revoke it in Business settings and generate a new one.
+      </div>
+      <p style="margin-top:20px">With the four IDs I can finish Phase 02 — the collector and scorer — and hand you the first ranked table of every post you have published. That runs on data, not spend, so it happens while verification is still pending.</p>
+      <p><strong>One thing to set now, while you are in there.</strong> When you build the first campaign, targeting must <em>exclude</em> the Indianapolis metro. You said the goal is outside Indianapolis, and Meta will happily serve your ads to people three miles from the gym who would have found you anyway. It is one field, and it is easy to forget.</p>
+    </div>
+  </section>
+
+  <footer>
+    Prepared for Dan German &middot; Dangerman Training Systems / Dangerman OWL<br>
+    Companion to the growth plan. Meta's interface labels change often; destinations and values here are what matter.<br>
+    Written 28 Aug 2026 without browser access &mdash; if a screen does not match, describe it and we will sort it out.
+  </footer>
+
+</div>
