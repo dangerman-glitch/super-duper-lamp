@@ -1,0 +1,600 @@
+<title>Proven Creative Engine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+  :root {
+    --ground: #f3f4f1;
+    --surface: #ffffff;
+    --sunk: #eaebe7;
+    --ink: #14181c;
+    --steel: #59636c;
+    --rule: #d8dbd7;
+    --rule-strong: #b9bfb9;
+    --accent: #a8302a;
+    --accent-soft: #f2e2e0;
+    --warn: #8a6413;
+    --warn-soft: #f5ecd8;
+    --good: #2f6647;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0f1317;
+      --surface: #161b20;
+      --sunk: #12171b;
+      --ink: #e5e7e4;
+      --steel: #939da5;
+      --rule: #293037;
+      --rule-strong: #3d464e;
+      --accent: #e2685c;
+      --accent-soft: #331c1a;
+      --warn: #d2a545;
+      --warn-soft: #2a2416;
+      --good: #6fb28c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0f1317;
+    --surface: #161b20;
+    --sunk: #12171b;
+    --ink: #e5e7e4;
+    --steel: #939da5;
+    --rule: #293037;
+    --rule-strong: #3d464e;
+    --accent: #e2685c;
+    --accent-soft: #331c1a;
+    --warn: #d2a545;
+    --warn-soft: #2a2416;
+    --good: #6fb28c;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    padding: 0 24px 96px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 780px; margin: 0 auto; }
+
+  /* ---- type scale ---- */
+  h1, h2, h3, .eyebrow, .stat-n, table, .mono { font-family: Archivo, "Helvetica Neue", Arial, sans-serif; }
+
+  h1 {
+    font-size: clamp(2.1rem, 5.2vw, 3.1rem);
+    font-weight: 700;
+    letter-spacing: -0.028em;
+    line-height: 1.04;
+    text-wrap: balance;
+    margin: 0 0 18px;
+  }
+  h2 {
+    font-size: clamp(1.32rem, 2.9vw, 1.62rem);
+    font-weight: 700;
+    letter-spacing: -0.018em;
+    line-height: 1.18;
+    text-wrap: balance;
+    margin: 0 0 14px;
+  }
+  h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 0 0 8px;
+  }
+  p { margin: 0 0 16px; }
+  p:last-child { margin-bottom: 0; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.71rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin: 0 0 10px;
+  }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+
+  .lede {
+    font-size: 1.13rem;
+    color: var(--steel);
+    max-width: 62ch;
+  }
+
+  strong { font-weight: 600; }
+  em { font-style: italic; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---- header ---- */
+  header.masthead {
+    padding: 72px 0 34px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .kicker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    align-items: baseline;
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.71rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 26px;
+  }
+  .kicker .brand { color: var(--accent); font-weight: 600; }
+
+  /* ---- sections ---- */
+  section { padding: 46px 0; border-bottom: 1px solid var(--rule); }
+  section:last-of-type { border-bottom: 0; }
+  .body-col { max-width: 66ch; }
+
+  /* ---- notice ---- */
+  .notice {
+    background: var(--warn-soft);
+    border-left: 3px solid var(--warn);
+    padding: 18px 22px;
+    margin: 0 0 8px;
+  }
+  .notice .eyebrow { color: var(--warn); margin-bottom: 8px; }
+  .notice p { font-size: 0.96rem; }
+
+  /* ---- data table ---- */
+  .table-scroll { overflow-x: auto; margin: 6px 0 14px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.87rem;
+    font-variant-numeric: tabular-nums;
+    min-width: 520px;
+  }
+  caption {
+    caption-side: bottom;
+    text-align: left;
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--steel);
+    padding-top: 12px;
+    line-height: 1.5;
+  }
+  th, td { padding: 9px 12px; text-align: right; }
+  th:first-child, td:first-child { text-align: left; padding-left: 0; }
+  th:last-child, td:last-child { padding-right: 0; }
+  thead th {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    border-bottom: 1px solid var(--rule-strong);
+    white-space: nowrap;
+  }
+  tbody td { border-bottom: 1px solid var(--rule); }
+  tbody tr:last-child td { border-bottom: 1px solid var(--rule-strong); }
+  tbody th {
+    text-align: left;
+    font-weight: 600;
+    padding-left: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  tr.hero td, tr.hero th { color: var(--accent); }
+  .bar {
+    display: block;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 1px;
+    min-width: 2px;
+  }
+  .bar.dim { background: var(--rule-strong); }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  td.barcell { width: 34%; padding-left: 18px; }
+
+  /* ---- stat row ---- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 8px 0 22px;
+  }
+  .stat { background: var(--surface); padding: 18px 18px 16px; }
+  .stat-n {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    display: block;
+    line-height: 1.1;
+  }
+  .stat-n.accent { color: var(--accent); }
+  .stat-l {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.67rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel);
+    display: block;
+    margin-top: 7px;
+    line-height: 1.45;
+  }
+
+  /* ---- pull ---- */
+  .pull {
+    font-size: 1.24rem;
+    line-height: 1.45;
+    font-weight: 600;
+    border-left: 3px solid var(--accent);
+    padding: 4px 0 4px 22px;
+    margin: 26px 0;
+    max-width: 54ch;
+    text-wrap: balance;
+  }
+
+  /* ---- phases ---- */
+  .phase {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 0 22px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .phase:first-of-type { border-top: 1px solid var(--rule-strong); }
+  .phase-n {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding-top: 3px;
+    line-height: 1.5;
+  }
+  .phase-n span { display: block; color: var(--steel); font-weight: 400; letter-spacing: 0.04em; }
+  .phase-body p { font-size: 0.97rem; }
+  .ships {
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.76rem;
+    color: var(--steel);
+    margin-top: 10px;
+    line-height: 1.55;
+  }
+  .ships b { color: var(--ink); font-weight: 600; }
+
+  /* ---- cards ---- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px;
+    margin: 8px 0 4px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 20px;
+  }
+  .card p { font-size: 0.93rem; color: var(--steel); margin: 0; }
+  .card h3 { margin-bottom: 7px; }
+
+  /* ---- lists ---- */
+  ul.plain { list-style: none; padding: 0; margin: 0 0 16px; }
+  ul.plain li {
+    padding: 11px 0 11px 26px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    font-size: 0.97rem;
+  }
+  ul.plain li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 21px;
+    width: 12px;
+    height: 2px;
+    background: var(--accent);
+  }
+  ul.plain li:last-child { border-bottom: 0; }
+
+  ol.asks { padding-left: 0; list-style: none; counter-reset: ask; margin: 0; }
+  ol.asks li {
+    counter-increment: ask;
+    padding: 16px 0 16px 44px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  ol.asks li::before {
+    content: counter(ask, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 17px;
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  ol.asks li:last-child { border-bottom: 0; }
+  ol.asks .q { font-weight: 600; display: block; margin-bottom: 4px; }
+  ol.asks .a { font-size: 0.93rem; color: var(--steel); }
+
+  /* ---- flow diagram ---- */
+  .flow { margin: 10px 0 8px; }
+  .flow svg { display: block; width: 100%; height: auto; }
+
+  footer {
+    padding: 40px 0 0;
+    border-top: 2px solid var(--ink);
+    font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--steel);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; padding: 0 18px 64px; }
+    .phase { grid-template-columns: 1fr; gap: 8px; }
+    .phase-n span { display: inline; margin-left: 8px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span class="brand">Myriad Weightlifting</span>
+      <span>Paid acquisition plan</span>
+      <span>28 Aug 2026</span>
+    </div>
+    <h1>Stop making ads. Promote the posts that already won.</h1>
+    <p class="lede">You have 70 published videos and three years of free creative testing sitting unused. Eight of them carry 60% of your total views. The system I want to build finds those winners automatically and puts money behind them — Meta first, YouTube second.</p>
+  </header>
+
+  <section>
+    <p class="eyebrow">First, a correction</p>
+    <div class="notice">
+      <p class="eyebrow">I could not use Chrome</p>
+      <p>This session runs in a cloud container. The Claude in Chrome extension lives on your laptop, so I have no browser here and could not open Instagram or your Meta account. What I did instead: read your <strong>YouTube catalog sheet</strong>, your <strong>Notion social pipeline</strong>, and your <strong>Master Athlete Roster</strong> through the connectors. Stripe and Canva are installed but switched off for this chat, so there are no revenue figures below.</p>
+      <p>The gap that leaves: Instagram-native numbers — saves, shares, follows, profile visits — and the state of your ad account. Two ways to close it, and the second one you need anyway. Details at the end.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">What the catalog says</p>
+    <h2>Two thirds of your output goes into your worst-performing format</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-n">70</span><span class="stat-l">Videos in catalog</span></div>
+      <div class="stat"><span class="stat-n">65,665</span><span class="stat-l">Lifetime views</span></div>
+      <div class="stat"><span class="stat-n accent">60%</span><span class="stat-l">Of views from 8 videos</span></div>
+      <div class="stat"><span class="stat-n">54</span><span class="stat-l">Median views, exercise demo</span></div>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+      <caption>Bar width is mean views per video, relative to the top format. Source: YouTube catalog sheet, read 28 Aug 2026. Format labels are mine, assigned from titles.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Format</th>
+            <th scope="col">Videos</th>
+            <th scope="col">Total views</th>
+            <th scope="col">Median</th>
+            <th scope="col">Mean</th>
+            <th scope="col"><span class="visually-hidden">Share</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hero">
+            <th scope="row">Opinion / technique short</th>
+            <td>8</td><td>39,395</td><td>1,872</td><td>4,924</td>
+            <td class="barcell"><span class="bar" style="width:100%"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">Athlete competition clip</th>
+            <td>12</td><td>14,586</td><td>586</td><td>1,216</td>
+            <td class="barcell"><span class="bar dim" style="width:25%"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">Exercise demo / tutorial</th>
+            <td>46</td><td>11,588</td><td>54</td><td>252</td>
+            <td class="barcell"><span class="bar dim" style="width:5%"></span></td>
+          </tr>
+          <tr>
+            <th scope="row">Other</th>
+            <td>4</td><td>96</td><td>18</td><td>24</td>
+            <td class="barcell"><span class="bar dim" style="width:1%"></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="body-col">
+      <p>Your seven opinion shorts published in 2025 average <strong>5,624 views</strong>. Your 46 exercise demos have a median of <strong>54</strong>. That is not a content problem — the demos are coaching infrastructure, the library you link into Bridge so athletes know what a Kickstand RDL looks like. They do their job. They just are not reach, and it would be a mistake to treat the two as the same pile.</p>
+      <p>The single best-performing thing you have ever published is <em>&ldquo;Sift through the endless metrics&rdquo;</em> at <strong>25,593 views</strong> — four times your next best. It is a point of view, not a demonstration. So is <em>&ldquo;Which trap are you caught in?&rdquo;</em> (5,120) and <em>&ldquo;Miss a lift and go up?&rdquo;</em> (3,074). Your Notion pipeline is already full of this format: <em>Are belts cheating</em>, <em>Zombie squat &mdash; legit or meme lift?</em>, <em>No foot &mdash; good or bad?</em>. Written, unpublished, sitting there.</p>
+    </div>
+
+    <p class="pull">Organic view count is a free creative pretest. You have already run it 70 times. Ads should spend money only on the posts that passed.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">The strategic call</p>
+    <h2>Advertise Learn to Lift, not your 1:1 coaching</h2>
+    <div class="body-col">
+      <p>Your roster shows roughly <strong>45 athletes on named check-in days</strong>, Monday through Friday, plus about <strong>20 in the Bench group</strong>, and five more in Drive who are active in intake but not yet assigned a day. You are one coach. Buying traffic for 1:1 slots means paying to generate demand you cannot serve, and the fastest way to burn a coaching business is to accept athletes you do not have hours for.</p>
+      <p><strong>Learn to Lift</strong> — the 12-week beginner program — has no capacity ceiling. <strong>Find Your Phase</strong> is already the right cold CTA and already exists. So the funnel is built; nothing new needs inventing:</p>
+    </div>
+
+    <div class="flow" role="img" aria-label="Funnel: a proven organic post becomes a paid ad, which drives cold traffic to the Find Your Phase quiz, then into email nurture, which sells Learn to Lift; a small share of that audience books a fifteen-minute call for one-to-one coaching.">
+      <svg viewBox="0 0 760 128" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ah" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--rule-strong)"/>
+          </marker>
+        </defs>
+        <g fill="none" stroke="currentColor" color="var(--rule-strong)" stroke-width="1.4" marker-end="url(#ah)">
+          <path d="M132,44 H166"/><path d="M270,44 H304"/><path d="M408,44 H442"/><path d="M546,44 H580"/>
+          <path d="M494,62 V96 H580" stroke-dasharray="3 4"/>
+        </g>
+        <g>
+          <rect x="2" y="24" width="130" height="40" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+          <rect x="168" y="24" width="102" height="40" fill="var(--surface)" stroke="var(--rule-strong)"/>
+          <rect x="306" y="24" width="102" height="40" fill="var(--surface)" stroke="var(--rule-strong)"/>
+          <rect x="444" y="24" width="102" height="40" fill="var(--surface)" stroke="var(--rule-strong)"/>
+          <rect x="582" y="24" width="176" height="40" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2"/>
+          <rect x="582" y="76" width="176" height="40" fill="var(--sunk)" stroke="var(--rule-strong)" stroke-dasharray="3 4"/>
+        </g>
+        <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--ink)" text-anchor="middle">
+          <text x="67" y="41">Proven post</text><text x="67" y="54" fill="var(--steel)">top 10% organic</text>
+          <text x="219" y="48">Paid ad</text>
+          <text x="357" y="41">Find Your</text><text x="357" y="54">Phase quiz</text>
+          <text x="495" y="48">Email nurture</text>
+          <text x="670" y="48" font-weight="600">Learn to Lift</text>
+          <text x="670" y="94">15-min call &rarr; 1:1</text>
+          <text x="670" y="107" fill="var(--steel)">only when you have room</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="body-col">
+      <p>The dotted path stays open, but it is a valve you control — not the thing the budget chases. When you have a slot, you turn it on.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">The system</p>
+    <h2>Four moving parts, one of which is you</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Collector</h3>
+        <p>Nightly pull of organic performance from the Instagram Graph API and YouTube Data API into Supabase, which you already have connected. Backfills all 70 videos on first run.</p>
+      </div>
+      <div class="card">
+        <h3>Scorer</h3>
+        <p>Ranks every post on engagement per impression, not raw views, so a strong recent post is not buried by a 2024 clip that had two years to accumulate.</p>
+      </div>
+      <div class="card">
+        <h3>Promoter</h3>
+        <p>Turns an approved winner into a live Meta ad through the Marketing API: campaign, ad set, audience, creative, budget. Later, the same step against Google Ads for YouTube.</p>
+      </div>
+      <div class="card">
+        <h3>Governor</h3>
+        <p>Auto-pauses any ad whose cost per quiz completion crosses your ceiling, enforces the daily cap, and files a weekly report. This half runs with no approval — stopping spend is always safe.</p>
+      </div>
+    </div>
+    <div class="body-col" style="margin-top:22px">
+      <p><strong>Where you sit in it:</strong> once a week you get a short list — <em>&ldquo;these three posts earned promotion, approve?&rdquo;</em> Launching costs money, so a human says yes. Pausing saves money, so the machine does it alone. That asymmetry is the whole safety design.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Build order</p>
+    <h2>Ten weeks, Meta live in six</h2>
+
+    <div class="phase">
+      <div class="phase-n">Phase 01<span>Weeks 1–2</span></div>
+      <div class="phase-body">
+        <h3>Plumbing</h3>
+        <p>Meta Business verification and app access for the Marketing API — the slowest step, so it starts first. Pixel plus Conversions API on the quiz, with quiz completion as the conversion event. Supabase schema. Google Ads and YouTube API credentials requested now so Phase 04 is not waiting on paperwork.</p>
+        <p class="ships"><b>Ships:</b> a test conversion firing end-to-end, tables live, credentials in hand.</p>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-n">Phase 02<span>Week 3</span></div>
+      <div class="phase-body">
+        <h3>Collector and scorer</h3>
+        <p>Nightly sync running. Full backfill of the YouTube catalog and your Instagram history. First real output: one ranked table of every post you have ever published, scored the same way, which is a thing you have never had.</p>
+        <p class="ships"><b>Ships:</b> the ranking, and the first weekly shortlist for you to react to — no spend yet.</p>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-n">Phase 03<span>Weeks 4–6</span></div>
+      <div class="phase-body">
+        <h3>Meta goes live</h3>
+        <p>One campaign, conversion objective, quiz completion. Three ad sets to separate cold interest targeting from lookalikes built off quiz finishers from a warm retargeting pool. Seed creative is your existing winners — <em>Sift through the endless metrics</em> first. Governor rules switched on before the first dollar, not after.</p>
+        <p class="ships"><b>Ships:</b> live spend at roughly $15/day, auto-pause armed, weekly report landing in your inbox.</p>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-n">Phase 04<span>Weeks 7–10</span></div>
+      <div class="phase-body">
+        <h3>YouTube</h3>
+        <p>Google Ads Video Action campaigns against the same scoring layer and the same quiz conversion — the collector and scorer are already built, so this phase is mostly the promoter learning a second API. Budget splits only after Meta has a cost-per-quiz number worth beating.</p>
+        <p class="ships"><b>Ships:</b> two channels on one scoring engine, one report covering both.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Money and measurement</p>
+    <h2>What it costs and how we know it worked</h2>
+    <div class="body-col">
+      <p>Start at <strong>$15/day, about $450/month</strong>, for a 60-day read. That is enough volume to learn something and small enough that a bad month is not a real wound. Infrastructure is effectively free — Supabase and Zapier are already on your account.</p>
+      <p>Three metrics, in order. Do not skip ahead:</p>
+      <ul class="plain">
+        <li><strong>Cost per quiz completion</strong> — the only number that matters in month one. Below $4 and the machine is working.</li>
+        <li><strong>Quiz &rarr; Learn to Lift conversion rate</strong> — measured in month two. If traffic is cheap but nobody buys, the problem is the nurture sequence, not the ads, and we fix that before adding budget.</li>
+        <li><strong>Cost per sale against program price</strong> — the number that decides whether this scales past $450/month or gets switched off.</li>
+      </ul>
+      <p>Honest risks, stated up front. Meta Business verification can take two weeks and is outside my control. Attribution on a quiz-to-email-to-purchase path is genuinely fuzzy, so treat month one as directional. And there is a real chance the answer is <em>no</em> — that paid traffic to a beginner program does not pay for itself at your price. A $900 two-month test is the cheapest way to find that out, and finding it out is a legitimate result.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Before I build</p>
+    <h2>Four things I need from you</h2>
+    <ol class="asks">
+      <li>
+        <span class="q">Is Learn to Lift the destination?</span>
+        <span class="a">My recommendation, on the capacity argument above. Say the word if you would rather fill 1:1 slots and I will rebuild the funnel around the 15-minute call — but then we cap spend hard, because demand you cannot serve is worse than no demand.</span>
+      </li>
+      <li>
+        <span class="q">Confirm the budget.</span>
+        <span class="a">$15/day for 60 days is what I have planned against. Higher gets a faster read; lower stretches the learning period past the point of usefulness.</span>
+      </li>
+      <li>
+        <span class="q">How much rope does the machine get?</span>
+        <span class="a">I have planned for: you approve every launch, it pauses on its own. The alternative is full autopilot above a score threshold. I would not do that until we have three months of data.</span>
+      </li>
+      <li>
+        <span class="q">API access, or Chrome on your laptop?</span>
+        <span class="a">API access is the real answer — the system needs it regardless, and it is what makes any of this run unattended. If you want the Instagram-native read first, run me in Claude Code on your desktop with the Chrome extension and I will do the walkthrough I could not do here.</span>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <p class="eyebrow">One more thing</p>
+    <div class="body-col">
+      <p>Your catalog's last entry is dated <strong>29 December 2025</strong>. Either the sheet stopped being updated or publishing slowed down over the last eight months — I cannot tell which from here, and it matters. This system amplifies proven posts. It needs a supply of new ones to prove. Your Notion pipeline has a dozen written and unpublished, so the raw material is there.</p>
+    </div>
+  </section>
+
+  <footer>
+    Prepared for Dan German &middot; Myriad Weightlifting / Dangerman OWL<br>
+    Sources: YouTube catalog sheet, Master Athlete Roster, Notion Social Media page &mdash; read 28 Aug 2026.<br>
+    No Stripe revenue data; connector not enabled for this session.
+  </footer>
+
+</div>
