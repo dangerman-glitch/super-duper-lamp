@@ -44,18 +44,46 @@ Consequences of aiming at 1:1 on a trickle budget:
   shorts stay top-of-funnel.
 - **The Governor gains a capacity switch** — ads pause when open slots hit zero.
 
-## Status
+## Economics (rev 3, from Stripe live mode)
 
-Plan only. No ad code, no credentials, no spend.
+Read from the Stripe API directly — all subscriptions plus 90 days of charges.
+Sigma reporting was not available on the key, so aggregates are computed from raw
+objects (`../analysis/stripe_subscription_analysis.py`).
+
+| Metric | Value |
+|---|---|
+| Active subscriptions | 6 |
+| MRR | $745 |
+| Price range / median | $75–$150 / $125 |
+| Cancelled subscriptions | 12 |
+| Median completed lifetime | 5.9 months |
+| Trailing 12mo: new / cancelled | 5 / 4 |
+| **Implied LTV** | **~$740** (median rate × median lifetime) |
+
+Consequences:
+
+- **The test has one question:** can $720 of spend (90 days at $8/day) produce one
+  athlete? One signing ≈ break-even, two is working, zero means stop.
+- **Retention beats acquisition on the arithmetic.** Moving median tenure from 5.9
+  to 9 months adds ~$390 LTV per athlete for no ad spend. New subscriptions are
+  roughly replacing cancellations, so the base is close to flat.
+- **Some churn is involuntary.** 2 of 12 cancellations ended in `payment_failed`,
+  and 3 of 22 charge attempts in the last 90 days failed (one customer, card
+  returning `transaction_not_allowed`). Dunning recovers most of this.
 
 ## Open
 
-- 1:1 rate, average athlete tenure, and open slot count. The slot count configures
-  the capacity switch; the other two turn cost-per-signing into a payback figure.
-  Enabling the Stripe connector would cover the revenue side.
+**Which list is the source of truth for paying 1:1 athletes?** The roster has ~65
+names; Stripe has 6 active subscriptions and ~$760/mo total volume, and the two
+barely overlap — several paying customers are absent from the roster, and most
+roster names are absent from Stripe. The capacity switch needs to count something
+real. If payments run outside Stripe, the system needs to know what to read.
+
+## Status
+
+Plan only. No ad code, no credentials, no spend.
 
 ## Not available during planning
 
 - Instagram-native metrics (saves, shares, profile visits) — resolved by the API
   decision above; the Instagram Graph API returns these in Phase 01.
-- Revenue figures — the Stripe connector was not enabled for the planning session.

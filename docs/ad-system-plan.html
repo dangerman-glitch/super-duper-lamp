@@ -385,7 +385,7 @@
   <header class="masthead">
     <div class="kicker">
       <span class="brand">Myriad Weightlifting</span>
-      <span>Paid acquisition plan &middot; rev 2</span>
+      <span>Paid acquisition plan &middot; rev 3</span>
       <span>28 Aug 2026</span>
     </div>
     <h1>Stop making ads. Promote the posts that already won.</h1>
@@ -413,12 +413,11 @@
   </section>
 
   <section>
-    <p class="eyebrow">One limitation, now closing</p>
+    <p class="eyebrow">Where these numbers come from</p>
     <div class="notice">
-      <p class="eyebrow">I could not use Chrome</p>
-      <p>This session runs in a cloud container. The Claude in Chrome extension lives on your laptop, so I have no browser here and could not open Instagram or your Meta account. What I did instead: read your <strong>YouTube catalog sheet</strong>, your <strong>Notion social pipeline</strong>, and your <strong>Master Athlete Roster</strong> through the connectors. Stripe and Canva are installed but switched off for this chat, so there are no revenue figures below.</p>
-      <p>Going the API route closes this properly rather than patching it — the Instagram Graph API returns saves, shares and profile visits directly, and unattended nightly syncing needs that access anyway. So there is no Chrome walkthrough to schedule; Phase 01 just gets me the credentials.</p>
-      <p>The revenue gap is the one that stays open. Aiming at 1:1 means the plan turns on your coaching rate and how long an athlete stays — numbers I do not have. See the ask at the end.</p>
+      <p class="eyebrow">Read directly, not estimated</p>
+      <p>Content figures come from your <strong>YouTube catalog sheet</strong> and <strong>Notion pipeline</strong>; revenue figures from <strong>Stripe live mode</strong> (Dangerman Training Systems) — every active and cancelled subscription, plus 90 days of charges. Sigma reporting was not on the key, so the aggregates below are computed from the raw objects rather than read off a dashboard.</p>
+      <p>I still have no Instagram-native numbers — no browser in this container. The API decision closes that: the Instagram Graph API returns saves, shares and profile visits directly, and unattended nightly syncing needs that access anyway. Phase 01 gets the credentials.</p>
     </div>
   </section>
 
@@ -616,17 +615,37 @@
   </section>
 
   <section>
+    <p class="eyebrow">What Stripe says</p>
+    <h2>Acquisition is not your tightest constraint. Retention is.</h2>
+
+    <div class="stats">
+      <div class="stat"><span class="stat-n">6</span><span class="stat-l">Active subscriptions</span></div>
+      <div class="stat"><span class="stat-n">$745</span><span class="stat-l">Monthly recurring</span></div>
+      <div class="stat"><span class="stat-n accent">5.9<span style="font-size:1rem"> mo</span></span><span class="stat-l">Median lifetime, churned</span></div>
+      <div class="stat"><span class="stat-n">12</span><span class="stat-l">Subscriptions ended</span></div>
+    </div>
+
+    <div class="body-col">
+      <p>Twelve subscriptions have ended against six still running, and completed lifetimes range from 1.6 to 18.2 months with a median of 5.9. Over the trailing twelve months you added five and lost four. That is close to flat: new athletes are roughly replacing departing ones rather than accumulating.</p>
+      <p>Which reframes what the ad system is for. Stretching median tenure from <strong>5.9 months to 9</strong> adds about <strong>$390 of lifetime value per athlete</strong> and costs nothing in ad spend — more than a whole quarter of the budget we just agreed, from athletes you already have. Paid acquisition into a bucket that empties every six months is the more expensive way to grow.</p>
+      <p>I am not recommending we drop the ad build; you have decided on it and the payback case below holds. I am saying the ads should not be the only thing you change this quarter, and if you ever have to choose between the two, retention wins on the arithmetic.</p>
+      <p><strong>One piece of that is mechanical, not motivational.</strong> Two of the twelve cancellations ended in <em>payment_failed</em> — involuntary churn, an athlete who did not choose to leave. And in the last 90 days, 3 of 22 charge attempts failed, all the same customer whose card keeps returning <em>transaction_not_allowed</em>. Dunning — automatic retries and a card-update email — recovers most of that. It is the cheapest revenue on this page.</p>
+    </div>
+  </section>
+
+  <section>
     <p class="eyebrow">Money and measurement</p>
     <h2>What it costs and how we know it worked</h2>
     <div class="body-col">
-      <p><strong>$8/day, about $240/month, read over 90 days</strong> — roughly $720 all in. Infrastructure is effectively free; Supabase and Zapier are already on your account. That is a small enough number that a dead quarter is an annoyance rather than a problem, which is the point of a trickle.</p>
+      <p><strong>$8/day, about $240/month, read over 90 days</strong> — roughly $720 all in. Infrastructure is effectively free; Supabase and Zapier are already on your account.</p>
+      <p><strong>The payback maths, now that I can do it.</strong> Your six active subscriptions run $75–$150/month, median $125. Your twelve cancelled subscriptions lasted a median of 5.9 months. So a signed athlete is worth roughly <strong>$740</strong> — about $1,000 at the top of your price range with a better-than-median stay.</p>
+      <p>That gives the test one clean question: <em>can $720 of ad spend produce one athlete?</em> One signing over the quarter roughly breaks even. Two and it is working. Zero and we stop. That is a more honest bar than any cost-per-click target, and it is what I will report against.</p>
       <p>Three metrics, in order. Do not skip ahead:</p>
       <ul class="plain">
         <li><strong>Cost per quiz completion</strong> — the optimiser's steering signal, not a business result. Under $4 means delivery is healthy.</li>
         <li><strong>Quiz &rarr; booked call rate</strong> — the number that tells us whether the routing works. If quizzes are cheap but nobody in the Improve or Compete phase books, the problem is the offer or the routing, not the ads, and we fix that before touching budget.</li>
-        <li><strong>Cost per signed athlete, against what an athlete is worth to you</strong> — the only number that decides whether this continues. It needs your rate and your average tenure, which I do not have.</li>
+        <li><strong>Cost per signed athlete, against the ~$740 an athlete is worth</strong> — the only number that decides whether this continues.</li>
       </ul>
-      <p><strong>The maths I cannot do yet.</strong> If an athlete pays monthly and stays a year, their lifetime value is large enough that even a few hundred dollars of ad spend per signing pays back quickly — and at $240/month the ceiling on damage is low regardless. But that is an argument, not a calculation, until I have the two numbers in the last ask below.</p>
       <p>Honest risks. Meta Business verification can take two weeks and is outside my control. A trickle budget means slow, noisy data — expect to feel impatient around week six and resist acting on it. And there is a real chance the answer is <em>no</em>: that cold paid traffic does not produce 1:1 athletes at any price that makes sense. $720 over a quarter is a cheap way to find that out, and finding it out is a legitimate result.</p>
     </div>
   </section>
@@ -636,8 +655,8 @@
     <h2>One thing I still need</h2>
     <ol class="asks">
       <li>
-        <span class="q">How many open 1:1 slots, and what is the rate?</span>
-        <span class="a">The slot count sets the capacity switch — it is a number the system needs on day one. The rate, plus roughly how long an athlete stays, is what turns cost-per-signing into an actual payback figure instead of an assertion. Enabling the Stripe connector would let me pull the revenue side myself.</span>
+        <span class="q">Which list tells the system you are full?</span>
+        <span class="a">Your roster has about 65 names. Stripe has 6 active subscriptions and roughly $760/month of total volume, and the two barely overlap — several people paying you every month are not on the roster, and most roster names are not in Stripe. So one of them is not a list of current paying 1:1 athletes, and I do not want to guess which. The capacity switch has to count something real, or it will either shut your ads off while you have room or keep them running when you are full. Tell me where paying athletes are actually tracked and I will wire it to that. If money moves outside Stripe, that is fine — I just need to know what to read.</span>
       </li>
     </ol>
   </section>
@@ -650,9 +669,9 @@
   </section>
 
   <footer>
-    Prepared for Dan German &middot; Myriad Weightlifting / Dangerman OWL &middot; Revision 2<br>
-    Sources: YouTube catalog sheet, Master Athlete Roster, Notion Social Media page &mdash; read 28 Aug 2026.<br>
-    No Stripe revenue data; connector not enabled for this session.
+    Prepared for Dan German &middot; Myriad Weightlifting / Dangerman OWL &middot; Revision 3<br>
+    Sources: YouTube catalog sheet, Master Athlete Roster, Notion Social Media page, Stripe (Dangerman Training Systems, live mode) &mdash; read 28 Aug 2026.<br>
+    Stripe figures cover all subscriptions and 90 days of charges; Sigma reporting was unavailable on this key.
   </footer>
 
 </div>
