@@ -385,7 +385,7 @@
   <header class="masthead">
     <div class="kicker">
       <span class="brand">Dangerman Training Systems</span>
-      <span>Growth plan to $20k &middot; rev 5</span>
+      <span>Growth plan to $20k &middot; rev 6</span>
       <span>28 Aug 2026</span>
     </div>
     <h1>$20k is nine athletes. The gap is smaller than it looks — and the budget is wrong.</h1>
@@ -403,7 +403,7 @@
         <dt>Reach</dt>
         <dd>Outside Indianapolis. National targeting, no local split.</dd>
         <dt>Budget</dt>
-        <dd>$8/day was set before the goal was. It does not reach $20k &mdash; revised below.</dd>
+        <dd>$100 over one concentrated week to test the plumbing and cost per quiz. Standing budget decided on that result.</dd>
         <dt>Control</dt>
         <dd>You approve every launch. The machine pauses on its own.</dd>
         <dt>Access</dt>
@@ -689,6 +689,41 @@
   </section>
 
   <section>
+    <p class="eyebrow">Week one</p>
+    <h2>$100 cannot measure traction. Here is what it can measure.</h2>
+    <div class="body-col">
+      <p>Spending $100 first is sensible and I would not talk you out of it. But it has to be judged on the right number, decided now rather than afterwards, because the obvious reading of it is wrong.</p>
+      <p><strong>Expect zero signed athletes.</strong> Not as pessimism &mdash; as arithmetic. At a $400 cost per acquisition, $100 buys a quarter of an athlete. Even at an optimistic $240, it buys four tenths of one. Zero signings is the single most likely outcome of a week that is going <em>well</em>. If traction means signings, this test fails by construction and tells you nothing about whether the machine works.</p>
+      <p>Two more reasons week one reads worse than the truth. Meta's optimiser needs roughly 50 conversions per ad set to leave its learning phase; $100 gets you somewhere between a fifth and two thirds of the way there, so you are measuring the algorithm while it is still guessing. And the retargeting layer &mdash; your athlete competition clips, the part that closes &mdash; has no audience to retarget yet. Week one is the worst week this campaign will ever have.</p>
+    </div>
+
+    <div class="table-scroll">
+      <table>
+      <caption>Judge week one on cost per quiz completion. The signed-athlete column is shown only to make clear why it cannot be the test.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Cost per quiz completion</th>
+            <th scope="col">Completions from $100</th>
+            <th scope="col">Implied CAC at 3% quiz&rarr;signed</th>
+            <th scope="col">Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hero"><th scope="row">Under $12</th><td>8+</td><td>Under $400</td><td>Fund it properly</td></tr>
+          <tr><th scope="row">$12&ndash;24</th><td>4&ndash;8</td><td>$400&ndash;800</td><td>Workable; keep going, tighten targeting</td></tr>
+          <tr><th scope="row">$24&ndash;40</th><td>2&ndash;4</td><td>$800&ndash;1,300</td><td>Offer or audience is wrong, not the budget</td></tr>
+          <tr><th scope="row">Over $40</th><td>Under 2</td><td>Over $1,300</td><td>Stop. Rethink before spending more</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="body-col">
+      <p>Two practical notes. <strong>Concentrate the spend</strong> &mdash; $25/day across four days rather than $14/day across seven. It gives the optimiser denser signal and tests at roughly the rate you would actually run at, so the numbers transfer. And <strong>the $100 week lands around week five or six</strong>, not next Friday: Meta Business verification has to clear first, and that is outside my control.</p>
+      <p>The other thing $100 buys, which is worth the money on its own: proof that the plumbing works. Pixel firing, Conversions API events landing, quiz routing sending Improve and Compete to the call and Learn to nurture, capacity switch counting. If any of that is broken you want to find out for $100, not for $900.</p>
+    </div>
+  </section>
+
+  <section>
     <p class="eyebrow">The multiplier</p>
     <h2>Retention is worth more than the ad budget</h2>
     <div class="body-col">
@@ -725,8 +760,8 @@
     <h2>Two decisions, then I build</h2>
     <ol class="asks">
       <li>
-        <span class="q">Approve $25&ndash;30/day, or hold at $8?</span>
-        <span class="a">This is the one place I am pushing back on a decision you already made, and only because the goal arrived after the budget did. At $8/day the model lands near $10k &mdash; a year of work to stand still. If cash flow is the constraint rather than caution, say so and I will build a ramp instead: start at $15/day, and raise it only out of revenue from athletes the ads actually signed. Slower to $20k, but it never costs you money you have not already earned.</span>
+        <span class="q">After the $100 week, what is the standing budget?</span>
+        <span class="a">The $100 test is agreed and does not need this answered yet &mdash; but the number it feeds into does. If cost per quiz lands under $12, the model says $25&ndash;30/day, and holding at $8 puts you on the row that collects $9,873 and ends the year roughly where it started. If cash flow is the real constraint rather than caution, say so and I will build a ramp: $15/day, raised only out of revenue from athletes the ads actually signed. Slower to $20k, never spending money you have not already earned.</span>
       </li>
       <li>
         <span class="q">Price new athletes at $200?</span>
@@ -746,7 +781,7 @@
   </section>
 
   <footer>
-    Prepared for Dan German &middot; Dangerman Training Systems / Dangerman OWL &middot; Revision 5<br>
+    Prepared for Dan German &middot; Dangerman Training Systems / Dangerman OWL &middot; Revision 6<br>
     Sources: YouTube catalog sheet, Master Athlete Roster, Notion Social Media page, Stripe (Dangerman Training Systems, live mode) &mdash; read 28 Aug 2026.<br>
     Stripe covers the remote coaching line only; in-person runs on a separate processor and is not represented here. Sigma reporting was unavailable on this key.
   </footer>
