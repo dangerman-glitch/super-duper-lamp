@@ -385,7 +385,7 @@
   <header class="masthead">
     <div class="kicker">
       <span class="brand">Myriad Weightlifting</span>
-      <span>Paid acquisition plan &middot; rev 3</span>
+      <span>Paid acquisition plan &middot; rev 4</span>
       <span>28 Aug 2026</span>
     </div>
     <h1>Stop making ads. Promote the posts that already won.</h1>
@@ -398,6 +398,8 @@
       <dl>
         <dt>Goal</dt>
         <dd>Fill 1:1 coaching slots. Learn to Lift sales are the second-order outcome, not the target.</dd>
+        <dt>Line</dt>
+        <dd>Remote coaching &mdash; the 6 Stripe subscriptions. In-person runs on a separate processor and is a different business.</dd>
         <dt>Budget</dt>
         <dd>$8/day &mdash; roughly $240/month &mdash; read over 90 days.</dd>
         <dt>Control</dt>
@@ -616,7 +618,12 @@
 
   <section>
     <p class="eyebrow">What Stripe says</p>
-    <h2>Acquisition is not your tightest constraint. Retention is.</h2>
+    <h2>Your remote line is six athletes, and it leaks</h2>
+
+    <div class="notice" style="margin-bottom:24px">
+      <p class="eyebrow">Read these as remote-only</p>
+      <p>Stripe holds your <strong>remote</strong> coaching. The ~65 names on the roster are in-person and run through a separate processor, so they are absent from every figure below — and rightly so. Paid social sells remote coaching; it cannot fill a platform in Indianapolis. The numbers that follow are the correct ones for this plan precisely because they exclude the in-person book.</p>
+    </div>
 
     <div class="stats">
       <div class="stat"><span class="stat-n">6</span><span class="stat-l">Active subscriptions</span></div>
@@ -626,9 +633,11 @@
     </div>
 
     <div class="body-col">
-      <p>Twelve subscriptions have ended against six still running, and completed lifetimes range from 1.6 to 18.2 months with a median of 5.9. Over the trailing twelve months you added five and lost four. That is close to flat: new athletes are roughly replacing departing ones rather than accumulating.</p>
-      <p>Which reframes what the ad system is for. Stretching median tenure from <strong>5.9 months to 9</strong> adds about <strong>$390 of lifetime value per athlete</strong> and costs nothing in ad spend — more than a whole quarter of the budget we just agreed, from athletes you already have. Paid acquisition into a bucket that empties every six months is the more expensive way to grow.</p>
+      <p>Twelve remote subscriptions have ended against six still running, and completed lifetimes range from 1.6 to 18.2 months with a median of 5.9. Over the trailing twelve months you added five and lost four. That is close to flat: new remote athletes are roughly replacing departing ones rather than accumulating.</p>
+      <p>Knowing these are remote-only makes that worse, not better, because it removes the charitable reading. This is not a big book with some churn at the edges — it is the whole remote line, and it has not grown in a year.</p>
+      <p>Which reframes what the ad system is for. Stretching median tenure from <strong>5.9 months to 9</strong> adds about <strong>$390 of lifetime value per athlete</strong> and costs nothing in ad spend — more than a whole quarter of the budget we agreed, from athletes you already have. Paid acquisition into a bucket that empties every six months is the more expensive way to grow, and with only six people in the bucket the leak is proportionally enormous.</p>
       <p>I am not recommending we drop the ad build; you have decided on it and the payback case below holds. I am saying the ads should not be the only thing you change this quarter, and if you ever have to choose between the two, retention wins on the arithmetic.</p>
+      <p><strong>Worth knowing what the contrast implies.</strong> You convert and hold in-person athletes at roughly ten times the volume of remote. Whatever you do face-to-face — the accountability, the immediacy, the room — is not currently reaching your remote athletes. That is a coaching-delivery question rather than an advertising one, but it is the thing most likely to move remote LTV, and no amount of ad spend substitutes for it.</p>
       <p><strong>One piece of that is mechanical, not motivational.</strong> Two of the twelve cancellations ended in <em>payment_failed</em> — involuntary churn, an athlete who did not choose to leave. And in the last 90 days, 3 of 22 charge attempts failed, all the same customer whose card keeps returning <em>transaction_not_allowed</em>. Dunning — automatic retries and a card-update email — recovers most of that. It is the cheapest revenue on this page.</p>
     </div>
   </section>
@@ -655,8 +664,12 @@
     <h2>One thing I still need</h2>
     <ol class="asks">
       <li>
-        <span class="q">Which list tells the system you are full?</span>
-        <span class="a">Your roster has about 65 names. Stripe has 6 active subscriptions and roughly $760/month of total volume, and the two barely overlap — several people paying you every month are not on the roster, and most roster names are not in Stripe. So one of them is not a list of current paying 1:1 athletes, and I do not want to guess which. The capacity switch has to count something real, or it will either shut your ads off while you have room or keep them running when you are full. Tell me where paying athletes are actually tracked and I will wire it to that. If money moves outside Stripe, that is fine — I just need to know what to read.</span>
+        <span class="q">How many remote athletes can you take?</span>
+        <span class="a">This is now a small, clean number rather than a reconciliation exercise — Stripe is the source of truth for the remote line, so the capacity switch counts active subscriptions against a ceiling you set. If six is comfortable and twelve is your limit, it stops the ads at twelve. I need the ceiling, and roughly how many hours a remote athlete costs you per month, so the switch protects your calendar rather than an arbitrary count.</span>
+      </li>
+      <li>
+        <span class="q">Should any of this budget go local instead?</span>
+        <span class="a">Everything above assumes national targeting for remote coaching, which is the only thing paid social can fill at distance. But your in-person line is where you demonstrably convert, and local ads around Indianapolis are usually cheaper and higher-intent than national ones. The catch is that in-person has a hard ceiling — you can only stand in one gym — and I do not know how close to it you are. If you have in-person room, a local split is probably the better buy. If you are full, ignore this and we stay national. Your call; I only need to know which.</span>
       </li>
     </ol>
   </section>
@@ -669,9 +682,9 @@
   </section>
 
   <footer>
-    Prepared for Dan German &middot; Myriad Weightlifting / Dangerman OWL &middot; Revision 3<br>
+    Prepared for Dan German &middot; Myriad Weightlifting / Dangerman OWL &middot; Revision 4<br>
     Sources: YouTube catalog sheet, Master Athlete Roster, Notion Social Media page, Stripe (Dangerman Training Systems, live mode) &mdash; read 28 Aug 2026.<br>
-    Stripe figures cover all subscriptions and 90 days of charges; Sigma reporting was unavailable on this key.
+    Stripe covers the remote coaching line only; in-person runs on a separate processor and is not represented here. Sigma reporting was unavailable on this key.
   </footer>
 
 </div>

@@ -44,7 +44,17 @@ Consequences of aiming at 1:1 on a trickle budget:
   shorts stay top-of-funnel.
 - **The Governor gains a capacity switch** — ads pause when open slots hit zero.
 
-## Economics (rev 3, from Stripe live mode)
+## Scope: the remote line only
+
+The business has two lines. **Remote** coaching runs through Stripe — 6 active
+subscriptions. **In-person** coaching runs through a separate processor and covers
+most of the ~65 names on the Master Athlete Roster.
+
+Paid social can only fill the remote line at distance, so every figure below is
+remote-only by design. The roster is not a reconciliation target for this system;
+the capacity switch counts active Stripe subscriptions against a ceiling.
+
+## Economics (rev 4, from Stripe live mode)
 
 Read from the Stripe API directly — all subscriptions plus 90 days of charges.
 Sigma reporting was not available on the key, so aggregates are computed from raw
@@ -71,13 +81,20 @@ Consequences:
   and 3 of 22 charge attempts in the last 90 days failed (one customer, card
   returning `transaction_not_allowed`). Dunning recovers most of this.
 
+Note the remote line has not grown in a year: 5 added, 4 lost. With only six
+athletes in it, a 5.9-month median lifetime is a proportionally enormous leak.
+The in-person line converts and holds at roughly 10x the volume — that gap is a
+coaching-delivery question, not an advertising one, and it is the likeliest
+lever on remote LTV.
+
 ## Open
 
-**Which list is the source of truth for paying 1:1 athletes?** The roster has ~65
-names; Stripe has 6 active subscriptions and ~$760/mo total volume, and the two
-barely overlap — several paying customers are absent from the roster, and most
-roster names are absent from Stripe. The capacity switch needs to count something
-real. If payments run outside Stripe, the system needs to know what to read.
+1. **Remote capacity ceiling** — how many remote athletes can be taken on, and
+   roughly what each costs in hours per month. The capacity switch counts active
+   Stripe subscriptions against this.
+2. **National vs local split** — the plan assumes national targeting for remote.
+   Local Indianapolis ads for in-person are usually cheaper and higher-intent,
+   but in-person has a hard ceiling. Depends on how close to full that line is.
 
 ## Status
 
