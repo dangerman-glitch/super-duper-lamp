@@ -142,3 +142,35 @@ ID and was skipped. The YouTube Data API backfill will pick it up in Phase 02.
 4. **Instagram Graph API** token — closes the saves/shares/profile-visits gap.
 5. **Google Ads + YouTube Data API** credentials — requested now so Phase 04
    is not waiting on paperwork.
+
+## Phase 02 — scorer running
+
+`../analysis/score_creatives.sql` populates `ads.creative_scores`. Ranks on
+**views per day**, not lifetime views, because raw views reward age: a 2024
+competition clip has had two years to accumulate and would always outrank a
+strong recent post.
+
+First ranked table (scored 2026-08-28, promotable formats only):
+
+| Rank | Format | Views/day | Lifetime | Post |
+|---:|---|---:|---:|---|
+| 1 | opinion | 69.2 | 25,593 | Sift through the endless metrics |
+| 2 | opinion | 11.7 | 5,120 | Which trap are you caught in? |
+| 3 | opinion | 8.6 | 3,074 | Miss a lift and go up? |
+| 4 | athlete | 5.8 | 5,219 | 125 kg Snatch for Ryan, 2024 Arnold |
+| 5 | opinion | 5.1 | 1,872 | Tall lifters, listen up |
+| 8 | opinion | 4.2 | 1,553 | Low blocks, best friend or worst enemy |
+| 10 | athlete | 3.6 | 3,233 | 110 C&J for Nikhil, 2024 Arnold |
+
+Velocity reorders the catalog. Ryan's snatch is 2nd on lifetime views but 4th
+on velocity — it looks strong mainly because it is old. The top three by
+velocity are all opinion shorts, which is the cold-traffic lane.
+
+**Seed creative for the $100 test:** *Sift through the endless metrics* at 69.2
+views/day, roughly 6x the next best.
+
+Limitation: with one snapshot and views only, this is velocity ranking, not
+engagement ranking. When the Instagram Graph API lands, make
+engagement-per-impression the primary term (saves and shares measure whether a
+post was worth someone's attention; views only measure delivery) and demote
+views/day to a tiebreaker.
