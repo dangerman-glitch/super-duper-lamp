@@ -289,8 +289,8 @@
   <ol class="check">
     <li><strong>Create the Google Ads account</strong> at ads.google.com. When it pushes you into "Smart Mode" during signup, look for the small <em>Switch to Expert Mode</em> link before you finish. Smart Mode hides the controls you need. If you get trapped, create the account without a campaign and it defaults to Expert.</li>
     <li><strong>Link your YouTube channel</strong> (Dangerman OWL) under <em>Tools → Linked accounts → YouTube</em>. Without this link you cannot build audiences from people who watched your videos — the single most valuable free asset you have.</li>
-    <li><strong>Install the Google tag</strong> on the site hosting the Find Your Phase quiz. <em>Tools → Data manager → Google tag</em>. If the quiz is on Squarespace, Wix, or Kajabi, each has a "header code injection" box — paste it there.</li>
-    <li><strong>Build a real thank-you page</strong> for quiz completions — a distinct URL like <span style="font-family:'JetBrains Mono',monospace;font-size:13px">/quiz/your-phase</span>. If the quiz shows results in a pop-up with no URL change, you have nothing to measure. Fixing this is the highest-value hour in this entire document.</li>
+    <li><strong>Install the Google tag</strong> in the quiz app. Your quiz lives at <span style="font-family:'JetBrains Mono',monospace;font-size:13px">dangerman-findyourphase.netlify.app</span> — a Netlify single-page app, so the tag goes in the <span style="font-family:'JetBrains Mono',monospace;font-size:13px">&lt;head&gt;</span> of <span style="font-family:'JetBrains Mono',monospace;font-size:13px">index.html</span> in the project source, then redeploy. Pasting it into the Netlify dashboard won't work; it has to ship with the build.</li>
+    <li><strong>Make the result screen measurable</strong> — see the block below. This is the highest-value hour in this entire document, and on a single-page app it will not happen by itself.</li>
     <li><strong>Create two conversion actions</strong> (<em>Goals → Conversions → New</em>), defined in the next block.</li>
     <li><strong>Create the remarketing audiences</strong> (<em>Tools → Audience manager</em>): everyone who visited the quiz page, everyone who completed it, and — from the YouTube link — everyone who watched any Dangerman OWL video in the last 540 days.</li>
     <li><strong>Turn off auto-applied recommendations.</strong> <em>Recommendations → the three-dot menu → Auto-apply → uncheck everything.</em> Google will otherwise "helpfully" broaden your targeting and eat a $30 budget in two days.</li>
@@ -315,6 +315,48 @@
 <span class="k">Primary?         </span><span class="v">No — Secondary (observation only)</span>
   </div>
   <p class="note">Why $40 on a quiz completion: if roughly one in ten quiz-takers books a call, and one in three of those signs at a $1,488 lifetime value, a quiz completion is worth about $50 to you. $40 is that number with a haircut. It gives Google a sane target instead of chasing whatever is cheapest.</p>
+
+  <h3>Making the Netlify quiz measurable</h3>
+  <p>A single-page app renders the result screen without loading a new page, so the browser's address bar never changes and Google Ads never sees a "conversion." Nothing else in this plan works until this is fixed.</p>
+
+  <h4>First — the 30-second test</h4>
+  <p>Open the quiz, answer it to the end, and watch the address bar the moment your phase appears.</p>
+  <ul>
+    <li><strong>The URL changed</strong> (to something like <span style="font-family:'JetBrains Mono',monospace;font-size:13px">/results</span>) → you can use a simple destination-URL conversion. Still add the event below; it's more reliable.</li>
+    <li><strong>The URL stayed on <span style="font-family:'JetBrains Mono',monospace;font-size:13px">/</span></strong> → you have no conversion at all right now. The event below is mandatory.</li>
+  </ul>
+
+  <h4>Then — fire the event where the result renders</h4>
+  <p>Find the component that displays the athlete's phase and add this where it first mounts. Get the conversion ID and label from <em>Goals → Conversions → Quiz Complete → Tag setup → Install the tag yourself</em>.</p>
+
+  <div class="fields">
+<span class="cm">// index.html &lt;head&gt; — ships with the build, above your app bundle</span>
+<span class="v">&lt;script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"&gt;&lt;/script&gt;</span>
+<span class="v">&lt;script&gt;</span>
+<span class="v">  window.dataLayer = window.dataLayer || [];</span>
+<span class="v">  function gtag(){dataLayer.push(arguments);}</span>
+<span class="v">  gtag('js', new Date());</span>
+<span class="v">  gtag('config', 'AW-XXXXXXXXX');</span>
+<span class="v">&lt;/script&gt;</span>
+
+<span class="cm">// In the results component — fires once, when the phase is shown</span>
+<span class="v">useEffect(() =&gt; {</span>
+<span class="v">  window.gtag?.('event', 'conversion', {</span>
+<span class="v">    send_to: 'AW-XXXXXXXXX/YourLabelHere',</span>
+<span class="v">    value: 40.0,</span>
+<span class="v">    currency: 'USD'</span>
+<span class="v">  });</span>
+<span class="cm">  // gives the URL something Analytics and humans can read</span>
+<span class="v">  window.history.pushState({}, '', '/your-phase');</span>
+<span class="v">}, []);</span>
+  </div>
+
+  <p class="note">If you add the <span style="font-family:'JetBrains Mono',monospace;font-size:13px">pushState</span> line, put a <span style="font-family:'JetBrains Mono',monospace;font-size:13px">_redirects</span> file in your <span style="font-family:'JetBrains Mono',monospace;font-size:13px">public/</span> folder containing <span style="font-family:'JetBrains Mono',monospace;font-size:13px">/* /index.html 200</span> — otherwise anyone who refreshes on that URL gets a Netlify 404.</p>
+
+  <p><strong>Verify before spending a dollar.</strong> Install the Google Tag Assistant Chrome extension, run it on the quiz, complete the quiz, and confirm the conversion fires. Then check <em>Goals → Conversions</em> — status should move from "No recent conversions" to "Recording conversions" within about 24 hours. Do not launch until it says that.</p>
+
+  <h4>One more thing worth doing on this domain</h4>
+  <p>A bare <span style="font-family:'JetBrains Mono',monospace;font-size:13px">.netlify.app</span> address costs you clicks — it reads as unfinished to someone deciding whether to trust a coach with their training. Point a subdomain at it (Netlify does this free under <em>Domain settings → Add custom domain</em>): <span style="font-family:'JetBrains Mono',monospace;font-size:13px">quiz.myriadweightlifting.com</span>, or whatever domain you control. Do it before launch so the ads never carry the Netlify URL.</p>
 </section>
 
 <!-- ============ 3 ============ -->
@@ -340,7 +382,15 @@
 <span class="k">Frequency cap    </span><span class="v">4 impressions / week / user</span>
 <span class="k">Ad schedule      </span><span class="v">All days 05:00–09:00 and 16:00–21:00 local</span>
 <span class="k">Devices          </span><span class="v">All, but bid adjust TV screens −100%</span>
+
+<span class="cm"># Ad final URL — use one tagged link per ad so you can tell them apart</span>
+<span class="k">Final URL        </span><span class="v">https://dangerman-findyourphase.netlify.app/</span>
+<span class="k">                 </span><span class="v">  ?utm_source=youtube&amp;utm_medium=cpv&amp;utm_campaign=findyourphase</span>
+<span class="k">                 </span><span class="v">  &amp;utm_content=week-four</span>   <span class="cm"># change per ad: week-four, the-map, bumper</span>
+<span class="k">CTA button text  </span><span class="v">Find your phase</span>   <span class="cm"># 10 char limit</span>
+<span class="k">Headline         </span><span class="v">You're not behind</span>    <span class="cm"># 15 char limit</span>
   </div>
+  <p class="note">Turn on auto-tagging (<em>Settings → Account settings → Auto-tagging</em>) as well. The UTMs are for you reading a report; auto-tagging's <span style="font-family:'JetBrains Mono',monospace;font-size:13px">gclid</span> is what lets Google match a click back to a conversion.</p>
 
   <p><strong>Why "Video views" and not "Drive conversions":</strong> conversion-optimized video needs a volume of data you cannot buy for $30. The views campaign gets your face in front of the right people cheaply and fills the remarketing list. Conversions come later, from the list.</p>
   <p><strong>Why exclude TV screens:</strong> nobody takes a quiz on their living-room television. You'd pay for views that can't click.</p>
@@ -586,7 +636,7 @@
 
 <footer>
   <p>Built from live Stripe data (6 active subscriptions, $745 MRR, Sept 2026), the Dangerman OWL video catalog, and the Learn to Lift funnel documents. Industry CPC and CPL figures from 2026 Google Ads benchmark data for the health &amp; fitness vertical.</p>
-  <p><strong>One thing still needed:</strong> the live Find Your Phase quiz URL and its thank-you page URL. Every conversion action above depends on them.</p>
+  <p><strong>Before launch, in order:</strong> run the 30-second URL test on the quiz · add the conversion event to the results component and redeploy · confirm Tag Assistant sees it fire · point a custom subdomain at the Netlify app. Then spend the first dollar.</p>
 </footer>
 
 </div>
