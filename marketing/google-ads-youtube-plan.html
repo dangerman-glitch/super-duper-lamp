@@ -1,0 +1,592 @@
+<title>The First Thirty Dollars</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#EFEFEC;
+    --surface:#FFFFFF;
+    --surface-2:#F6F6F3;
+    --ink:#16191C;
+    --ink-2:#3D444B;
+    --muted:#6B737C;
+    --rule:#D6D7D2;
+    --rule-soft:#E4E5E0;
+    --red:#B33127;
+    --blue:#1D5893;
+    --green:#3F6B3A;
+    --yellow:#9A7B12;
+    --code-bg:#F2F2EE;
+    --shadow:0 1px 2px rgba(20,25,30,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#131619;
+      --surface:#1A1E22;
+      --surface-2:#20252A;
+      --ink:#E9E9E4;
+      --ink-2:#C2C6C9;
+      --muted:#8C949C;
+      --rule:#2C3238;
+      --rule-soft:#262B31;
+      --red:#E2685C;
+      --blue:#6BA6E0;
+      --green:#7FB077;
+      --yellow:#D2AC3F;
+      --code-bg:#22272C;
+      --shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#131619;
+    --surface:#1A1E22;
+    --surface-2:#20252A;
+    --ink:#E9E9E4;
+    --ink-2:#C2C6C9;
+    --muted:#8C949C;
+    --rule:#2C3238;
+    --rule-soft:#262B31;
+    --red:#E2685C;
+    --blue:#6BA6E0;
+    --green:#7FB077;
+    --yellow:#D2AC3F;
+    --code-bg:#22272C;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,"Times New Roman",serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px 96px}
+
+  /* ---------- masthead ---------- */
+  header.mast{
+    border-bottom:2px solid var(--ink);
+    padding:44px 0 20px;
+    margin-bottom:40px;
+  }
+  .eyebrow{
+    font-family:"JetBrains Mono",ui-monospace,monospace;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);margin:0 0 18px;
+  }
+  h1{
+    font-family:"Oswald",Impact,sans-serif;
+    font-weight:600;font-size:clamp(40px,7.5vw,68px);line-height:.98;
+    letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance;
+    margin:0 0 14px;
+  }
+  h1 .thin{font-weight:400;color:var(--muted)}
+  .standfirst{
+    font-size:19px;color:var(--ink-2);max-width:62ch;margin:0;
+  }
+
+  /* ---------- structure ---------- */
+  section{margin:0 0 52px}
+  h2{
+    font-family:"Oswald",Impact,sans-serif;
+    font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink);margin:0 0 6px;
+    display:flex;align-items:baseline;gap:12px;
+  }
+  h2 .num{
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--red);
+    letter-spacing:0;
+  }
+  .h2rule{height:1px;background:var(--rule);margin:0 0 26px}
+  h3{
+    font-family:"Oswald",Impact,sans-serif;
+    font-weight:500;font-size:22px;letter-spacing:.005em;
+    margin:34px 0 10px;text-wrap:balance;
+  }
+  h4{
+    font-family:"Oswald",Impact,sans-serif;font-weight:500;font-size:15px;
+    letter-spacing:.04em;text-transform:uppercase;margin:24px 0 8px;color:var(--ink-2);
+  }
+  p{margin:0 0 16px;max-width:66ch}
+  ul,ol{margin:0 0 16px;padding-left:22px;max-width:66ch}
+  li{margin:0 0 7px}
+  strong{font-weight:600}
+  a{color:var(--blue)}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  hr.soft{border:0;border-top:1px solid var(--rule-soft);margin:34px 0}
+
+  /* ---------- verdict panel ---------- */
+  .verdict{
+    background:var(--surface);border:1px solid var(--rule);
+    border-left:4px solid var(--red);
+    padding:22px 24px;box-shadow:var(--shadow);margin:0 0 30px;
+  }
+  .verdict p:last-child{margin-bottom:0}
+  .verdict .lede{font-size:19px;font-weight:500}
+
+  /* ---------- number strip ---------- */
+  .strip{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:1px;background:var(--rule);border:1px solid var(--rule);margin:0 0 28px;
+  }
+  .strip div{background:var(--surface);padding:14px 16px}
+  .strip dt{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 6px;
+  }
+  .strip dd{
+    margin:0;font-family:"Oswald",sans-serif;font-weight:500;font-size:26px;
+    font-variant-numeric:tabular-nums;line-height:1;
+  }
+  .strip dd small{font-size:13px;color:var(--muted);font-weight:400}
+
+  /* ---------- tables ---------- */
+  .tbl-scroll{overflow-x:auto;margin:0 0 20px}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+  th,td{
+    text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule-soft);
+    vertical-align:top;
+  }
+  thead th{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);
+    font-weight:500;white-space:nowrap;
+  }
+  td.num,th.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+
+  /* plate ramp */
+  .ramp td:first-child{
+    font-family:"Oswald",sans-serif;font-size:15px;letter-spacing:.05em;
+    text-transform:uppercase;white-space:nowrap;
+  }
+  .plate{
+    display:inline-block;width:10px;border-radius:2px;margin-right:2px;
+    vertical-align:middle;
+  }
+  .p-red{background:var(--red)}
+  .p-blue{background:var(--blue)}
+  .p-yellow{background:var(--yellow)}
+  .p-green{background:var(--green)}
+
+  /* ---------- field / paste blocks ---------- */
+  .fields{
+    background:var(--code-bg);border:1px solid var(--rule);
+    font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;
+    line-height:1.75;padding:16px 18px;margin:0 0 20px;overflow-x:auto;
+  }
+  .fields .k{color:var(--muted)}
+  .fields .v{color:var(--ink)}
+  .fields .cm{color:var(--green)}
+
+  /* ---------- ad copy cards ---------- */
+  .ads{display:flex;flex-direction:column;gap:14px;margin:0 0 22px}
+  .ad{
+    background:var(--surface);border:1px solid var(--rule);padding:14px 16px;
+    display:flex;justify-content:space-between;gap:18px;align-items:baseline;
+  }
+  .ad .txt{font-family:"JetBrains Mono",monospace;font-size:13.5px;line-height:1.6}
+  .ad .cnt{
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+    white-space:nowrap;font-variant-numeric:tabular-nums;
+  }
+  .ad .cnt.over{color:var(--red)}
+
+  /* ---------- script ---------- */
+  .script{
+    background:var(--surface);border:1px solid var(--rule);
+    padding:20px 22px;margin:0 0 20px;box-shadow:var(--shadow);
+  }
+  .script h5{
+    font-family:"Oswald",sans-serif;font-weight:500;font-size:14px;
+    letter-spacing:.08em;text-transform:uppercase;margin:0 0 4px;
+  }
+  .script .meta{
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+    margin:0 0 14px;letter-spacing:.03em;
+  }
+  .beat{display:grid;grid-template-columns:56px 1fr;gap:14px;margin:0 0 10px}
+  .beat .t{
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--red);
+    padding-top:4px;font-variant-numeric:tabular-nums;
+  }
+  .beat .l{margin:0;font-size:16px}
+  .beat .l em{color:var(--muted);font-style:italic}
+
+  /* ---------- checklist ---------- */
+  ol.check{list-style:none;padding:0;counter-reset:step}
+  ol.check>li{
+    counter-increment:step;position:relative;padding-left:38px;margin:0 0 14px;
+  }
+  ol.check>li::before{
+    content:counter(step,decimal-leading-zero);
+    position:absolute;left:0;top:2px;
+    font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);
+    border:1px solid var(--rule);padding:2px 5px;line-height:1;
+  }
+
+  .note{
+    font-size:14.5px;color:var(--muted);border-left:2px solid var(--rule);
+    padding-left:14px;margin:0 0 18px;max-width:62ch;
+  }
+  .flag{
+    display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10px;
+    letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;
+    border:1px solid currentColor;margin-right:8px;vertical-align:2px;
+  }
+  .flag.stop{color:var(--red)}
+  .flag.go{color:var(--green)}
+  .flag.wait{color:var(--yellow)}
+
+  footer{border-top:1px solid var(--rule);padding-top:20px;color:var(--muted);font-size:14px}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">Myriad Weightlifting · Google Ads &amp; YouTube · 90-day plan</p>
+  <h1>The First<br><span class="thin">Thirty</span> Dollars</h1>
+  <p class="standfirst">A $30/month ad budget can't buy clicks. It can buy an audience, a tracking system, and proof that your creative works — so that the day you can spend $400, it goes to work immediately instead of starting from zero.</p>
+</header>
+
+<!-- ============ 1 ============ -->
+<section>
+  <h2><span class="num">01</span> The honest math</h2>
+  <div class="h2rule"></div>
+
+  <div class="verdict">
+    <p class="lede">At $30/month, do not run Google Search ads. Run YouTube only.</p>
+    <p>Health &amp; fitness keywords average about <strong>$5.00 per click</strong> on Google Search in 2026. Thirty dollars buys you <strong>six clicks a month</strong> — roughly one every five days. Google's bidding algorithm needs somewhere near 30 conversions in 30 days to leave its learning phase; six clicks will never produce one. You'd be paying $360 a year to teach the machine nothing.</p>
+    <p>YouTube is priced per <em>view</em>, not per click. At $0.03–$0.10 per view, the same $30 buys <strong>300 to 1,000 people watching your face</strong>, all of whom land in a remarketing list you own forever. That list is the actual asset here.</p>
+  </div>
+
+  <h3>What an athlete is worth to you</h3>
+  <p>Pulled live from Stripe (Dangerman Training Systems, live mode):</p>
+
+  <dl class="strip">
+    <div><dt>Active subscriptions</dt><dd>6</dd></div>
+    <div><dt>Recurring revenue</dt><dd>$745<small>/mo</small></dd></div>
+    <div><dt>Average athlete</dt><dd>$124<small>/mo</small></dd></div>
+    <div><dt>Price range</dt><dd>$75–150</dd></div>
+  </dl>
+
+  <p><strong>Lifetime value, in one sentence:</strong> LTV is the total money one athlete pays you before they leave. If your average athlete pays $124/month and stays a year, that's <strong>$1,488</strong> — and because you deliver it yourself through Sheets, nearly all of it is margin.</p>
+
+  <p><strong>Customer acquisition cost (CAC)</strong> is what you spend on ads to sign one athlete. Against a $1,488 LTV, spending even <strong>$300 to sign one athlete</strong> is a 5:1 return. Most businesses would take that trade all day.</p>
+
+  <p>Which means the thing stopping you isn't the economics. It's cash on hand. So the plan below is built to spend almost nothing while you prove the creative, then ramp hard once one athlete has paid for the next month of ads.</p>
+
+  <p class="note">Caveat: these six are the active Stripe <em>subscriptions</em>. Athletes paying by invoice, cash, or through Myriad's gym billing won't appear here, so your real roster is likely larger and your real MRR higher. If so, every budget number below is conservative in your favor.</p>
+</section>
+
+<!-- ============ 2 ============ -->
+<section>
+  <h2><span class="num">02</span> Week one — the free build</h2>
+  <div class="h2rule"></div>
+  <p>None of this costs money. All of it has to exist before a dollar is spent, because ads that can't be measured are just donations.</p>
+
+  <ol class="check">
+    <li><strong>Create the Google Ads account</strong> at ads.google.com. When it pushes you into "Smart Mode" during signup, look for the small <em>Switch to Expert Mode</em> link before you finish. Smart Mode hides the controls you need. If you get trapped, create the account without a campaign and it defaults to Expert.</li>
+    <li><strong>Link your YouTube channel</strong> (Dangerman OWL) under <em>Tools → Linked accounts → YouTube</em>. Without this link you cannot build audiences from people who watched your videos — the single most valuable free asset you have.</li>
+    <li><strong>Install the Google tag</strong> on the site hosting the Find Your Phase quiz. <em>Tools → Data manager → Google tag</em>. If the quiz is on Squarespace, Wix, or Kajabi, each has a "header code injection" box — paste it there.</li>
+    <li><strong>Build a real thank-you page</strong> for quiz completions — a distinct URL like <span style="font-family:'JetBrains Mono',monospace;font-size:13px">/quiz/your-phase</span>. If the quiz shows results in a pop-up with no URL change, you have nothing to measure. Fixing this is the highest-value hour in this entire document.</li>
+    <li><strong>Create two conversion actions</strong> (<em>Goals → Conversions → New</em>), defined in the next block.</li>
+    <li><strong>Create the remarketing audiences</strong> (<em>Tools → Audience manager</em>): everyone who visited the quiz page, everyone who completed it, and — from the YouTube link — everyone who watched any Dangerman OWL video in the last 540 days.</li>
+    <li><strong>Turn off auto-applied recommendations.</strong> <em>Recommendations → the three-dot menu → Auto-apply → uncheck everything.</em> Google will otherwise "helpfully" broaden your targeting and eat a $30 budget in two days.</li>
+  </ol>
+
+  <h4>The two conversion actions</h4>
+  <div class="fields">
+<span class="cm"># Primary — this is what the algorithm optimizes toward</span>
+<span class="k">Name             </span><span class="v">Quiz Complete</span>
+<span class="k">Category         </span><span class="v">Submit lead form</span>
+<span class="k">Value            </span><span class="v">Use the same value: $40</span>  <span class="cm"># see note</span>
+<span class="k">Count            </span><span class="v">One</span>
+<span class="k">Click window     </span><span class="v">30 days</span>
+<span class="k">View window      </span><span class="v">1 day</span>
+<span class="k">Primary?         </span><span class="v">Yes — Primary action</span>
+
+<span class="cm"># Secondary — tracked, but never optimized toward</span>
+<span class="k">Name             </span><span class="v">Consult Booked</span>
+<span class="k">Category         </span><span class="v">Book appointment</span>
+<span class="k">Value            </span><span class="v">Use the same value: $400</span>
+<span class="k">Count            </span><span class="v">One</span>
+<span class="k">Primary?         </span><span class="v">No — Secondary (observation only)</span>
+  </div>
+  <p class="note">Why $40 on a quiz completion: if roughly one in ten quiz-takers books a call, and one in three of those signs at a $1,488 lifetime value, a quiz completion is worth about $50 to you. $40 is that number with a haircut. It gives Google a sane target instead of chasing whatever is cheapest.</p>
+</section>
+
+<!-- ============ 3 ============ -->
+<section>
+  <h2><span class="num">03</span> The campaign — settings to copy</h2>
+  <div class="h2rule"></div>
+  <p>One campaign. Not two. At this budget, splitting spend is how you get two campaigns that both learn nothing.</p>
+
+  <div class="fields">
+<span class="k">Campaign name    </span><span class="v">YT | Prospecting | Find Your Phase</span>
+<span class="k">Objective        </span><span class="v">Create campaign without a goal's guidance</span>
+<span class="k">Campaign type    </span><span class="v">Video</span>
+<span class="k">Subtype          </span><span class="v">Video views  (skippable in-stream + in-feed)</span>
+<span class="k">Bid strategy     </span><span class="v">Maximum CPV — manual bid $0.04</span>
+<span class="k">Budget           </span><span class="v">Daily $1.00   (= $30.42/mo the way Google bills)</span>
+<span class="k">Delivery         </span><span class="v">Standard  (never Accelerated)</span>
+<span class="k">Networks         </span><span class="v">YouTube videos ONLY</span>
+<span class="k">                 </span><span class="cm">↳ uncheck YouTube search, uncheck Display Network partners</span>
+<span class="k">Locations        </span><span class="v">United States  —  "Presence: people IN this location"</span>
+<span class="k">Languages        </span><span class="v">English</span>
+<span class="k">Inventory type   </span><span class="v">Limited inventory</span>
+<span class="k">Excluded content </span><span class="v">Embedded videos, Live streaming, Games, Parked domains</span>
+<span class="k">Frequency cap    </span><span class="v">4 impressions / week / user</span>
+<span class="k">Ad schedule      </span><span class="v">All days 05:00–09:00 and 16:00–21:00 local</span>
+<span class="k">Devices          </span><span class="v">All, but bid adjust TV screens −100%</span>
+  </div>
+
+  <p><strong>Why "Video views" and not "Drive conversions":</strong> conversion-optimized video needs a volume of data you cannot buy for $30. The views campaign gets your face in front of the right people cheaply and fills the remarketing list. Conversions come later, from the list.</p>
+  <p><strong>Why exclude TV screens:</strong> nobody takes a quiz on their living-room television. You'd pay for views that can't click.</p>
+  <p><strong>Why the day-parting:</strong> your buyer is watching lifting content before training or after work. Restricting hours concentrates a tiny budget where intent is highest.</p>
+
+  <h3>Targeting — build these three ad groups, enable one</h3>
+  <p>Create all three so they're ready. Start with only <strong>AG-1</strong> live; a dollar a day cannot feed three ad groups.</p>
+
+  <div class="tbl-scroll">
+  <table>
+    <thead><tr><th>Ad group</th><th>Targeting</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>AG-1</strong><br>Custom · Lifting Intent</td>
+        <td>Custom segment built from <em>search terms</em>: <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px">olympic weightlifting program, learn to snatch, snatch technique, clean and jerk technique, weightlifting coach online, how to start olympic weightlifting, beginner weightlifting program</span></td>
+        <td>People who typed these into Google or YouTube in the last week. The warmest cold audience that exists.</td>
+      </tr>
+      <tr>
+        <td><strong>AG-2</strong><br>Channel Placements</td>
+        <td>Placements → YouTube channels: Catalyst Athletics, Zack Telander, Weightlifting House, Squat University, Juggernaut Training Systems, Torokhtiy Weightlifting, CrossFit</td>
+        <td>Your ad plays before the exact videos your future athlete already watches. Highest control, lowest waste.</td>
+      </tr>
+      <tr>
+        <td><strong>AG-3</strong><br>Remarketing</td>
+        <td>Your YouTube viewers (540 days) + quiz page visitors who did not complete</td>
+        <td>Won't have volume for months. Build it now so it's collecting from day one.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h4>Exclusions — set these before launch, not after</h4>
+  <div class="fields">
+<span class="cm"># Placement exclusions (campaign level)</span>
+<span class="v">"Made for kids" content</span>
+<span class="v">Music &amp; audio channels</span>
+<span class="v">Gaming channels</span>
+<span class="cm"># Demographic exclusion</span>
+<span class="v">Age: Under 18</span>
+<span class="cm"># Review the placement report every Sunday and exclude any channel</span>
+<span class="cm"># that spent >$1.00 with a view rate under 15%.</span>
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section>
+  <h2><span class="num">04</span> Creative — you already own it</h2>
+  <div class="h2rule"></div>
+  <p>You don't need to shoot anything to launch. Your catalog already tells you which hooks stop a scroll. These are your five highest-viewed videos — the audience has already voted:</p>
+
+  <div class="tbl-scroll">
+  <table>
+    <thead><tr><th>Existing video</th><th class="num">Views</th><th>Use as</th></tr></thead>
+    <tbody>
+      <tr><td>Sift through the endless metrics. Find which are useful and discard the rest.</td><td class="num">25,593</td><td>Ad A — the proven hook, run it first</td></tr>
+      <tr><td>Which trap are you caught in? Only taking big or small jumps?</td><td class="num">5,120</td><td>Ad B — question hook, strong for in-feed</td></tr>
+      <tr><td>Miss a lift and go up? What do you do?</td><td class="num">3,074</td><td>Ad C — decision hook</td></tr>
+      <tr><td>Tall lifters, listen up! Your long limbs mean different rules for the snatch.</td><td class="num">1,872</td><td>Ad D — archetype hook, self-identifying</td></tr>
+      <tr><td>Low blocks can be your best friend or your worst enemy.</td><td class="num">1,553</td><td>Ad E — contrast hook</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>What to change:</strong> nothing about the first 25 seconds. Add an end card — 5 seconds, your face, "Take the two-minute Find Your Phase quiz" — and upload it as a separate unlisted video so the organic version keeps its own watch history. Unlisted works fine as an ad; it does not have to be public.</p>
+
+  <h3>Three scripts to shoot when you have twenty minutes</h3>
+  <p>Written to your funnel voice: the viewer is the hero, you're the guide, one low-friction CTA, no pressure.</p>
+
+  <div class="script">
+    <h5>Script 1 — "Week Four"</h5>
+    <p class="meta">30s · skippable in-stream · primary prospecting ad</p>
+    <div class="beat"><span class="t">0:00</span><p class="l">Nobody quits weightlifting in week one. They quit in week four.</p></div>
+    <div class="beat"><span class="t">0:04</span><p class="l">Week one is fun. Week four is when your shoulders are tight, your overhead squat looks nothing like the video, and you start wondering if you're built for this.</p></div>
+    <div class="beat"><span class="t">0:13</span><p class="l">That's not failure. That's the Road of Trials. Every lifter who has ever stood on a platform walked through it first.</p></div>
+    <div class="beat"><span class="t">0:20</span><p class="l">The fear is universal. The guide is optional. <em>[beat]</em> Get one.</p></div>
+    <div class="beat"><span class="t">0:24</span><p class="l">I'm Dan. Two-minute quiz, link below — it'll tell you which phase you're actually in. No card, no pitch. Just a straight answer.</p></div>
+  </div>
+
+  <div class="script">
+    <h5>Script 2 — "The Map"</h5>
+    <p class="meta">15s · skippable in-stream · second creative, tests the guide angle</p>
+    <div class="beat"><span class="t">0:00</span><p class="l">You don't need another generic workout program. You've already tried one.</p></div>
+    <div class="beat"><span class="t">0:05</span><p class="l">The snatch and the clean and jerk are two of the most technical movements in strength sport. Learning them alone isn't slow. It's how good people get hurt.</p></div>
+    <div class="beat"><span class="t">0:11</span><p class="l">I'm not here to be impressive. I'm here to hand you the map. Two-minute quiz, link below.</p></div>
+  </div>
+
+  <div class="script">
+    <h5>Script 3 — "Not Behind"</h5>
+    <p class="meta">6s · bumper · non-skippable, remarketing only</p>
+    <div class="beat"><span class="t">0:00</span><p class="l">You're not behind.</p></div>
+    <div class="beat"><span class="t">0:02</span><p class="l">You just haven't had a guide yet.</p></div>
+    <div class="beat"><span class="t">0:04</span><p class="l">Find your phase. Link below.</p></div>
+  </div>
+
+  <p class="note">Shoot all three in one session, phone on a tripod, platform behind you, bar loaded. Natural light beats a ring light. Vertical <em>and</em> horizontal — YouTube serves both, and Shorts inventory is currently the cheapest per view in the auction.</p>
+</section>
+
+<!-- ============ 5 ============ -->
+<section>
+  <h2><span class="num">05</span> The ramp</h2>
+  <div class="h2rule"></div>
+  <p>Each rung is gated on the previous rung's result — not on the calendar and not on how it feels. Add weight when the lift is clean.</p>
+
+  <div class="tbl-scroll">
+  <table class="ramp">
+    <thead><tr><th>Rung</th><th class="num">Daily</th><th class="num">Monthly</th><th>Gate to move up</th><th>What runs</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="plate p-green" style="height:14px"></span> Empty bar</td>
+        <td class="num">$1</td><td class="num">$30</td>
+        <td>4 weeks live, view rate above 20%, at least 1 quiz completion tracked</td>
+        <td>AG-1 only, one ad</td>
+      </tr>
+      <tr>
+        <td><span class="plate p-green" style="height:18px"></span> +10 kg</td>
+        <td class="num">$2</td><td class="num">$60</td>
+        <td>Cost per quiz completion under $60</td>
+        <td>AG-1 + AG-2, two ads rotating</td>
+      </tr>
+      <tr>
+        <td><span class="plate p-yellow" style="height:22px"></span> +15 kg</td>
+        <td class="num">$5</td><td class="num">$150</td>
+        <td>One consult booked from ads</td>
+        <td>Add AG-3 remarketing + the 6s bumper</td>
+      </tr>
+      <tr>
+        <td><span class="plate p-blue" style="height:27px"></span> +20 kg</td>
+        <td class="num">$13</td><td class="num">$400</td>
+        <td>One athlete signed from ads (ads now pay for themselves 3×)</td>
+        <td>Add the Search campaign in section 06</td>
+      </tr>
+      <tr>
+        <td><span class="plate p-red" style="height:32px"></span> +25 kg</td>
+        <td class="num">$33</td><td class="num">$1,000</td>
+        <td>CAC under $300 across two consecutive months</td>
+        <td>Scale whichever channel signed athletes; drop the other</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p><strong>The funding rule:</strong> never raise the budget from savings. Raise it from a signed athlete. One athlete at $124/month funds the $60 rung with $64 left over. Two fund the $150 rung. The ladder pays for itself or it doesn't get climbed.</p>
+</section>
+
+<!-- ============ 6 ============ -->
+<section>
+  <h2><span class="num">06</span> The Search campaign — built now, launched at $400</h2>
+  <div class="h2rule"></div>
+  <p>Build it, then pause it. When the ramp reaches $400/month, you unpause instead of spending a Saturday figuring it out.</p>
+
+  <div class="fields">
+<span class="k">Campaign name    </span><span class="v">SR | Exact | Weightlifting Coach</span>
+<span class="k">Type             </span><span class="v">Search — no Display expansion, no Search partners</span>
+<span class="k">Bid strategy     </span><span class="v">Manual CPC + Enhanced, cap $6.00</span>
+<span class="k">                 </span><span class="cm">↳ switch to Maximize conversions only after 15 conversions</span>
+<span class="k">Budget           </span><span class="v">Daily $10</span>
+<span class="k">Locations        </span><span class="v">United States — Presence only</span>
+<span class="k">Match types      </span><span class="v">Phrase and Exact only. No Broad, ever, at this budget.</span>
+  </div>
+
+  <h4>Keywords — start with these eleven</h4>
+  <div class="fields">
+<span class="v">[online weightlifting coach]</span>
+<span class="v">[olympic weightlifting coach online]</span>
+<span class="v">[remote weightlifting coaching]</span>
+<span class="v">[online olympic lifting coach]</span>
+<span class="v">[weightlifting coaching program]</span>
+<span class="v">"beginner olympic weightlifting program"</span>
+<span class="v">"learn olympic weightlifting online"</span>
+<span class="v">"how to learn the snatch"</span>
+<span class="v">"olympic lifting for beginners"</span>
+<span class="v">"snatch technique coaching"</span>
+<span class="v">"usaw coach online programming"</span>
+  </div>
+
+  <h4>Negative keywords — add before launch</h4>
+  <div class="fields">
+<span class="v">free, cheap, salary, jobs, hiring, certification, cert, course for coaches</span>
+<span class="v">near me, gym near, powerlifting, bodybuilding, crossfit games, shoes, belt</span>
+<span class="v">barbell for sale, equipment, reddit, youtube, pdf, download, template free</span>
+<span class="v">nutrition, weight loss, lose weight, women's weight loss, personal trainer near me</span>
+  </div>
+  <p class="note">"Certification" is the expensive one. Coaches searching to <em>get certified</em> will burn your budget at $6 a click and never buy coaching. Same with "near me" — you coach remotely; local-intent searchers want a gym.</p>
+
+  <h4>Responsive search ad — headlines (30 char limit)</h4>
+  <div class="ads">
+    <div class="ad"><span class="txt">Online Weightlifting Coach</span><span class="cnt">26/30</span></div>
+    <div class="ad"><span class="txt">USAW Level 3 Coach, Remote</span><span class="cnt">26/30</span></div>
+    <div class="ad"><span class="txt">Stop Guessing At The Snatch</span><span class="cnt">27/30</span></div>
+    <div class="ad"><span class="txt">Programming Built Around You</span><span class="cnt">28/30</span></div>
+    <div class="ad"><span class="txt">You're Not Behind</span><span class="cnt">17/30</span></div>
+    <div class="ad"><span class="txt">Find Your Phase In 2 Minutes</span><span class="cnt">28/30</span></div>
+    <div class="ad"><span class="txt">Coached, Not Self-Taught</span><span class="cnt">24/30</span></div>
+    <div class="ad"><span class="txt">From Empty Bar To Platform</span><span class="cnt">26/30</span></div>
+  </div>
+
+  <h4>Descriptions (90 char limit)</h4>
+  <div class="ads">
+    <div class="ad"><span class="txt">Nobody starts strong. They start coached. Take the 2-minute quiz and find your phase.</span><span class="cnt">85/90</span></div>
+    <div class="ad"><span class="txt">USAW Level 3 International Coach. Remote programming built around how you move.</span><span class="cnt">78/90</span></div>
+    <div class="ad"><span class="txt">No card required. No pitch in your inbox. Just a clear answer on where you stand.</span><span class="cnt">80/90</span></div>
+    <div class="ad"><span class="txt">Learn the snatch and clean &amp; jerk with a guide, not a YouTube tutorial and a guess.</span><span class="cnt">83/90</span></div>
+  </div>
+
+  <h4>Extensions — all free, all worth adding</h4>
+  <ul>
+    <li><strong>Sitelinks:</strong> Find Your Phase Quiz · Learn to Lift · About Coach Dan · Athlete Results</li>
+    <li><strong>Callouts:</strong> USAW Level 3 · Remote Worldwide · Weekly Check-Ins · Personalized Programming</li>
+    <li><strong>Structured snippet</strong> (header: Types): Beginner On-Ramp, 1-on-1 Remote Coaching, Meet Day Coaching, Technique Consults</li>
+    <li><strong>Image extension:</strong> a lifter mid-catch, not a logo</li>
+  </ul>
+</section>
+
+<!-- ============ 7 ============ -->
+<section>
+  <h2><span class="num">07</span> Ten minutes a week</h2>
+  <div class="h2rule"></div>
+  <p>Set a recurring Sunday block. Do only these four things. Resisting the urge to fiddle daily is most of the skill.</p>
+
+  <ol class="check">
+    <li><strong>Placement report.</strong> <em>Content → Where ads showed.</em> Exclude anything that spent over $1 with a view rate under 15%.</li>
+    <li><strong>View rate check.</strong> Above 25% is strong, 15–25% is fine, under 15% means the first five seconds aren't working — swap the ad, don't touch the targeting.</li>
+    <li><strong>Search terms</strong> (once Search is live). <em>Keywords → Search terms.</em> Add every irrelevant query as a negative. This is where most wasted spend hides.</li>
+    <li><strong>Log the numbers.</strong> Spend, views, quiz completions, consults booked. Four numbers in a sheet. Without the log you can't tell a rung is passed.</li>
+  </ol>
+
+  <h4>Kill criteria — decide these now, while it's cheap to be honest</h4>
+  <ul>
+    <li><span class="flag stop">Stop</span> 60 days, $60 spent, zero quiz completions → the destination is broken, not the ads. Fix the quiz page before spending another dollar.</li>
+    <li><span class="flag wait">Hold</span> View rate under 12% after two different ads → the offer isn't landing on cold traffic. Go back to organic content until something breaks out.</li>
+    <li><span class="flag go">Go</span> Cost per quiz completion under $60 → climb the ramp immediately, don't wait for the month to end.</li>
+  </ul>
+</section>
+
+<!-- ============ 8 ============ -->
+<section>
+  <h2><span class="num">08</span> Two things that beat the ad account</h2>
+  <div class="h2rule"></div>
+  <p>Said plainly, because $30/month deserves a straight answer about what it can and can't do.</p>
+  <p><strong>Your organic YouTube is outperforming any budget you can currently fund.</strong> One video did 25,593 views. At the $0.04 CPV you'd bid, buying that reach costs about $1,024 — thirty-four months of your ad budget. Posting two more videos like it is a better use of a Saturday than any account optimization in this document. Use the ads to catch the people organic reach is already producing.</p>
+  <p><strong>Google Ads has a free grant most solo coaches never claim.</strong> Google frequently offers new advertisers a spend-matching credit — typically "spend $500, get $500" over the first 60 days. It appears in the account after your first payment. You cannot use it at $30/month, but if a credit shows up in your account, that's the moment to pull the $400 rung forward: it's real money that expires, and it's the one case where spending ahead of the ramp is correct.</p>
+</section>
+
+<footer>
+  <p>Built from live Stripe data (6 active subscriptions, $745 MRR, Sept 2026), the Dangerman OWL video catalog, and the Learn to Lift funnel documents. Industry CPC and CPL figures from 2026 Google Ads benchmark data for the health &amp; fitness vertical.</p>
+  <p><strong>One thing still needed:</strong> the live Find Your Phase quiz URL and its thank-you page URL. Every conversion action above depends on them.</p>
+</footer>
+
+</div>
