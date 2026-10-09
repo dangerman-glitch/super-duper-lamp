@@ -1,0 +1,480 @@
+<title>Three Ads, One Session</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ground:#EFEFEC; --surface:#FFFFFF; --surface-2:#F6F6F3;
+    --ink:#16191C; --ink-2:#3D444B; --muted:#6B737C;
+    --rule:#D6D7D2; --rule-soft:#E4E5E0;
+    --red:#B33127; --blue:#1D5893; --green:#3F6B3A; --yellow:#9A7B12;
+    --code-bg:#F2F2EE; --shadow:0 1px 2px rgba(20,25,30,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#131619; --surface:#1A1E22; --surface-2:#20252A;
+      --ink:#E9E9E4; --ink-2:#C2C6C9; --muted:#8C949C;
+      --rule:#2C3238; --rule-soft:#262B31;
+      --red:#E2685C; --blue:#6BA6E0; --green:#7FB077; --yellow:#D2AC3F;
+      --code-bg:#22272C; --shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#131619; --surface:#1A1E22; --surface-2:#20252A;
+    --ink:#E9E9E4; --ink-2:#C2C6C9; --muted:#8C949C;
+    --rule:#2C3238; --rule-soft:#262B31;
+    --red:#E2685C; --blue:#6BA6E0; --green:#7FB077; --yellow:#D2AC3F;
+    --code-bg:#22272C; --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground);color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 20px 90px}
+
+  header.mast{border-bottom:2px solid var(--ink);padding:40px 0 18px;margin-bottom:34px}
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 16px;
+  }
+  h1{
+    font-family:"Oswald",Impact,sans-serif;font-weight:600;
+    font-size:clamp(36px,7vw,60px);line-height:1;letter-spacing:-.005em;
+    text-transform:uppercase;text-wrap:balance;margin:0 0 14px;
+  }
+  h1 .thin{font-weight:400;color:var(--muted)}
+  .standfirst{font-size:18px;color:var(--ink-2);max-width:60ch;margin:0}
+
+  p{margin:0 0 14px;max-width:64ch}
+  ul{margin:0 0 14px;padding-left:20px;max-width:64ch}
+  li{margin:0 0 6px}
+  strong{font-weight:600}
+  a{color:var(--blue)}
+  a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+  h2{
+    font-family:"Oswald",sans-serif;font-weight:500;font-size:13px;
+    letter-spacing:.16em;text-transform:uppercase;margin:0 0 6px;
+    display:flex;align-items:baseline;gap:12px;
+  }
+  h2 .num{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--red);letter-spacing:0}
+  .h2rule{height:1px;background:var(--rule);margin:0 0 24px}
+  section{margin:0 0 50px}
+
+  h4{
+    font-family:"Oswald",sans-serif;font-weight:500;font-size:14px;
+    letter-spacing:.07em;text-transform:uppercase;margin:26px 0 8px;color:var(--ink-2);
+  }
+
+  /* ---- script header card ---- */
+  .slate{
+    background:var(--surface);border:1px solid var(--rule);border-top:4px solid var(--red);
+    padding:20px 22px;margin:0 0 4px;box-shadow:var(--shadow);
+  }
+  .slate .title{
+    font-family:"Oswald",sans-serif;font-weight:600;font-size:clamp(26px,5vw,34px);
+    text-transform:uppercase;letter-spacing:.01em;line-height:1.05;margin:0 0 12px;
+  }
+  .slate .title span{color:var(--muted);font-weight:400}
+  .specs{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(108px,1fr));
+    gap:14px 18px;margin:0;
+  }
+  .specs div{min-width:0}
+  .specs dt{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 4px;
+  }
+  .specs dd{
+    margin:0;font-family:"Oswald",sans-serif;font-weight:500;font-size:15px;
+    letter-spacing:.02em;
+  }
+
+  /* ---- beat rows ---- */
+  .sheet{border:1px solid var(--rule);border-top:none;background:var(--surface);margin:0 0 20px}
+  .row{
+    display:grid;grid-template-columns:62px 1fr;gap:16px;
+    padding:16px 22px;border-top:1px solid var(--rule-soft);
+  }
+  .row:first-child{border-top:none}
+  .tc{
+    font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--red);
+    font-variant-numeric:tabular-nums;padding-top:3px;letter-spacing:-.02em;
+  }
+  .body{min-width:0}
+  .vo{
+    font-family:"Newsreader",serif;font-size:19px;line-height:1.45;
+    margin:0 0 8px;font-weight:500;
+  }
+  .vo em{color:var(--muted);font-weight:400;font-size:16px}
+  .dir{
+    font-size:14px;color:var(--muted);margin:0 0 6px;max-width:58ch;
+  }
+  .dir b{color:var(--ink-2);font-weight:600}
+  .ost{
+    display:inline-block;font-family:"Oswald",sans-serif;font-weight:500;
+    font-size:13px;letter-spacing:.08em;text-transform:uppercase;
+    border:1px solid var(--rule);background:var(--surface-2);
+    padding:4px 9px;margin:2px 0 0;color:var(--ink-2);
+  }
+  .ost::before{
+    content:"on screen";font-family:"JetBrains Mono",monospace;font-size:9px;
+    letter-spacing:.1em;color:var(--muted);margin-right:8px;
+  }
+
+  .fields{
+    background:var(--code-bg);border:1px solid var(--rule);
+    font-family:"JetBrains Mono",monospace;font-size:13px;line-height:1.7;
+    padding:14px 16px;margin:0 0 18px;overflow-x:auto;
+  }
+  .fields .k{color:var(--muted)}
+  .fields .cm{color:var(--green)}
+
+  .note{
+    font-size:14.5px;color:var(--muted);border-left:2px solid var(--rule);
+    padding-left:14px;margin:0 0 18px;max-width:60ch;
+  }
+  .caption{
+    background:var(--surface-2);border:1px solid var(--rule);padding:16px 18px;
+    margin:0 0 16px;font-size:16px;
+  }
+  .caption p{margin:0 0 10px}
+  .caption p:last-child{margin:0}
+  .tags{
+    font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--blue);
+    line-height:1.7;word-break:break-word;
+  }
+  .tbl-scroll{overflow-x:auto;margin:0 0 18px}
+  table{border-collapse:collapse;width:100%;min-width:480px;font-size:15px}
+  th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+  thead th{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);
+    font-weight:500;white-space:nowrap;
+  }
+  tbody tr:last-child td{border-bottom:none}
+  footer{border-top:1px solid var(--rule);padding-top:18px;color:var(--muted);font-size:14px;margin-top:10px}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+  @media (max-width:520px){
+    .row{grid-template-columns:52px 1fr;gap:12px;padding:14px 16px}
+    .slate{padding:16px 18px}
+  }
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">Dangerman OWL · YouTube ad creative · shoot list</p>
+  <h1>Three Ads,<br><span class="thin">One</span> Session</h1>
+  <p class="standfirst">Shoot all three back to back. Same outfit, same platform, same light — about twenty minutes. Every line is written to be said, not read, so change any word that doesn't sound like you.</p>
+</header>
+
+<!-- ===== SETUP ===== -->
+<section>
+  <h2><span class="num">00</span> Before you hit record</h2>
+  <div class="h2rule"></div>
+
+  <div class="fields">
+<span class="k">Framing     </span>Shoot 9:16 vertical. Stand left of center, bar in frame right.
+<span class="k">            </span><span class="cm"># crops cleanly to 16:9 later; shooting wide first never does</span>
+<span class="k">Camera      </span>Phone, tripod, chest height, 3–4 feet back. Rear lens.
+<span class="k">Light       </span>Face the brightest window or open door. Nothing behind you brighter
+<span class="k">            </span>than your face.
+<span class="k">Audio       </span>Wired earbuds with a mic, or stand close. Gym reverb kills watch time
+<span class="k">            </span>faster than anything you say.
+<span class="k">Wardrobe    </span>Whatever you actually coach in. No logo-free blank tee — people buy
+<span class="k">            </span>from a coach who looks like he was mid-session.
+<span class="k">Set         </span>Loaded bar on the platform behind you. Chalk out. Don't tidy up.
+<span class="k">Takes       </span>Three per script, straight through. Pick in the edit, not on set.
+  </div>
+
+  <p class="note">One rule that matters more than the rest: look at the lens, not the screen. On a phone that means the little glass circle, not your own face. An ad where the coach looks slightly off-camera reads as a man talking about you. Looking down the lens reads as a man talking to you.</p>
+</section>
+
+<!-- ===== SCRIPT 1 ===== -->
+<section>
+  <h2><span class="num">01</span> Primary prospecting ad</h2>
+  <div class="h2rule"></div>
+
+  <div class="slate">
+    <p class="title">Week Four <span>/ 30s</span></p>
+    <dl class="specs">
+      <div><dt>Runtime</dt><dd>0:30</dd></div>
+      <div><dt>Placement</dt><dd>Skippable in-stream</dd></div>
+      <div><dt>Audience</dt><dd>Cold · AG-1</dd></div>
+      <div><dt>Job</dt><dd>Name the fear</dd></div>
+      <div><dt>CTA</dt><dd>Quiz</dd></div>
+    </dl>
+  </div>
+
+  <div class="sheet">
+    <div class="row">
+      <span class="tc">0:00</span>
+      <div class="body">
+        <p class="vo">Nobody quits weightlifting in week one.</p>
+        <p class="dir"><b>Shot:</b> You, mid-frame, already talking as the ad opens — no greeting, no intro, no breath. <b>Why:</b> the skip button appears at five seconds. The first sentence has to be the whole hook.</p>
+        <span class="ost">Nobody quits in week one</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:03</span>
+      <div class="body">
+        <p class="vo">They quit in week four.</p>
+        <p class="dir"><b>Shot:</b> Hold. Let it land before you move. <b>Delivery:</b> flat, certain. This is the two-beat flip — the first line sets it up, this one turns it.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:05</span>
+      <div class="body">
+        <p class="vo">Week one is fun. Everything's new, everything's light, everybody's encouraging.</p>
+        <p class="dir"><b>B-roll:</b> empty bar overhead squat, someone learning. If you don't have a beginner clip you have permission to use, shoot ten seconds of your own hands chalking and loading a 15 kg bar. Hands and plates always work.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:10</span>
+      <div class="body">
+        <p class="vo">Week four is when your shoulders are tight, your overhead squat looks nothing like the video, and you start wondering if you're built for this.</p>
+        <p class="dir"><b>Shot:</b> back to you, direct to lens. <b>Delivery:</b> slow down on "built for this." That's the sentence that makes a stranger feel seen.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:18</span>
+      <div class="body">
+        <p class="vo">That's not failure. That's the Road of Trials.</p>
+        <p class="dir"><b>Shot:</b> hold on you. Nothing moves. <b>Why:</b> name the fear, then reframe it — this is the turn the whole ad is built around.</p>
+        <span class="ost">That's not failure</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:21</span>
+      <div class="body">
+        <p class="vo">Every lifter who's ever stood on a platform walked through it first.</p>
+        <p class="dir"><b>B-roll:</b> a competition clip — a bar locked out, a lifter walking off the platform. Use your own footage only where the athlete has said yes.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:24</span>
+      <div class="body">
+        <p class="vo">The fear is universal. <em>[beat]</em> The guide is optional.</p>
+        <p class="dir"><b>Delivery:</b> real pause between the two lines. A full second. The gap is doing the work.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:26</span>
+      <div class="body">
+        <p class="vo">I'm Dan. Two-minute quiz, link below — it'll tell you which phase you're actually in. No card, no pitch. Just a straight answer.</p>
+        <p class="dir"><b>Shot:</b> you, direct to lens, slight warm-up in tone — this is the only friendly beat in the ad. <b>End card from 0:28:</b> quiz name, your name, "Find your phase."</p>
+        <span class="ost">Find your phase · 2 minutes · no card</span>
+      </div>
+    </div>
+  </div>
+
+  <h4>If you only shoot one thing today, shoot this one</h4>
+  <p>It's the only script that does the full job on a stranger: names a specific pain, reframes it, and introduces a guide. The other two are support.</p>
+</section>
+
+<!-- ===== SCRIPT 2 ===== -->
+<section>
+  <h2><span class="num">02</span> Second creative — tests the guide angle</h2>
+  <div class="h2rule"></div>
+
+  <div class="slate">
+    <p class="title">The Map <span>/ 15s</span></p>
+    <dl class="specs">
+      <div><dt>Runtime</dt><dd>0:15</dd></div>
+      <div><dt>Placement</dt><dd>In-stream + in-feed</dd></div>
+      <div><dt>Audience</dt><dd>Cold · AG-1 / AG-2</dd></div>
+      <div><dt>Job</dt><dd>Kill the objection</dd></div>
+      <div><dt>CTA</dt><dd>Quiz</dd></div>
+    </dl>
+  </div>
+
+  <div class="sheet">
+    <div class="row">
+      <span class="tc">0:00</span>
+      <div class="body">
+        <p class="vo">You don't need another generic program. You've already tried one.</p>
+        <p class="dir"><b>Shot:</b> direct to lens, no preamble. <b>Delivery:</b> the second sentence is the hook — it tells a stranger you already know their history.</p>
+        <span class="ost">You've already tried one</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:04</span>
+      <div class="body">
+        <p class="vo">The snatch and the clean and jerk are two of the most technical movements in strength sport.</p>
+        <p class="dir"><b>B-roll:</b> a snatch at speed, then the same lift in slow motion. Fast-then-slow on the same rep reads as expertise without a single credential on screen.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:08</span>
+      <div class="body">
+        <p class="vo">Learning them alone isn't slow. It's how good people get hurt.</p>
+        <p class="dir"><b>Shot:</b> back to you. <b>Delivery:</b> say it plainly, no warning tone. The restraint is what makes it land.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:11</span>
+      <div class="body">
+        <p class="vo">I'm not here to be impressive. I'm here to hand you the map. Two-minute quiz, link below.</p>
+        <p class="dir"><b>Shot:</b> direct to lens, hold to the end. <b>End card from 0:13.</b></p>
+        <span class="ost">Find your phase</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">Why this one exists: "Week Four" sells to someone already training. "The Map" sells to someone who hasn't started and is scared of hurting themselves. Different fear, same guide. Running both tells you which fear your market actually has — and that's worth more than the clicks.</p>
+</section>
+
+<!-- ===== SCRIPT 3 ===== -->
+<section>
+  <h2><span class="num">03</span> Bumper — remarketing only</h2>
+  <div class="h2rule"></div>
+
+  <div class="slate">
+    <p class="title">Not Behind <span>/ 6s</span></p>
+    <dl class="specs">
+      <div><dt>Runtime</dt><dd>0:06</dd></div>
+      <div><dt>Placement</dt><dd>Non-skippable bumper</dd></div>
+      <div><dt>Audience</dt><dd>Warm · AG-3</dd></div>
+      <div><dt>Job</dt><dd>Stay remembered</dd></div>
+      <div><dt>CTA</dt><dd>Quiz</dd></div>
+    </dl>
+  </div>
+
+  <div class="sheet">
+    <div class="row">
+      <span class="tc">0:00</span>
+      <div class="body">
+        <p class="vo">You're not behind.</p>
+        <p class="dir"><b>Shot:</b> tight on your face. Closer than feels comfortable. Six seconds has no room for a wide.</p>
+        <span class="ost">You're not behind</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:02</span>
+      <div class="body">
+        <p class="vo">You just haven't had a guide yet.</p>
+        <p class="dir"><b>Delivery:</b> no pause, straight through. A bumper is one sentence with a comma in it.</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <span class="tc">0:04</span>
+      <div class="body">
+        <p class="vo">Find your phase. Link below.</p>
+        <p class="dir"><b>End card:</b> holds the final two seconds. No fade — bumpers get cut off by the player, so land everything by 0:05.</p>
+        <span class="ost">Find your phase · dangermanowl</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="note">A bumper can't convert a stranger and shouldn't try. Its one job is to be the fourth time this week someone sees your face, so that the fifth time they finally take the quiz. Keep it on remarketing only — on cold traffic it's money spent on recognition that doesn't exist yet.</p>
+</section>
+
+<!-- ===== END CARD ===== -->
+<section>
+  <h2><span class="num">04</span> The end card — build it once</h2>
+  <div class="h2rule"></div>
+  <p>Same card on all three ads. Two seconds, static, no animation. Make it once in Canva at 1080×1920 and reuse it.</p>
+
+  <div class="fields">
+<span class="k">Line 1   </span>FIND YOUR PHASE          <span class="cm"># large, condensed, all caps</span>
+<span class="k">Line 2   </span>2-minute quiz. No card.  <span class="cm"># small, sentence case</span>
+<span class="k">Line 3   </span>Dan German · USAW Level 3 International Coach
+<span class="k">Visual   </span>Your face, chest up, left third. Text right third.
+<span class="k">         </span><span class="cm"># never a logo on a plain background — people follow people</span>
+<span class="k">Safe area</span>Keep all text out of the bottom 20% — the YouTube CTA button
+<span class="k">         </span>and the Shorts UI both sit there.
+  </div>
+
+  <p>I can build this card in Canva if you want it — say the word and I'll put a draft in your account.</p>
+</section>
+
+<!-- ===== REPURPOSE ===== -->
+<section>
+  <h2><span class="num">05</span> Repurpose them as organic reels</h2>
+  <div class="h2rule"></div>
+  <p>You're shooting three videos anyway. Post them. Organic reach costs nothing, and the plan already says your organic is outperforming any budget you can fund right now.</p>
+
+  <p><strong>One change for organic:</strong> cut the end card and swap the spoken CTA to "link in bio." An ad CTA on an organic post reads as an ad and tanks the reach.</p>
+
+  <h4>Reel 1 — "Week Four" caption</h4>
+  <div class="caption">
+    <p>Nobody quits weightlifting in week one. They quit in week four.</p>
+    <p>Week one is fun. Everything's new, everything's light, everybody's encouraging.</p>
+    <p>Week four is when your shoulders are tight, your overhead squat looks nothing like the video, and you start wondering if you're built for this.</p>
+    <p>That's not failure. That's the Road of Trials. Every lifter who's ever stood on a platform walked through it first.</p>
+    <p>The fear is universal. The guide is optional.</p>
+    <p>Not sure which phase you're in? Two-minute quiz, link in bio. No pressure either way.</p>
+    <p class="tags">#olympicweightlifting #weightlifting #dangermanowl #myriadweightlifting</p>
+  </div>
+
+  <h4>Reel 2 — "The Map" caption</h4>
+  <div class="caption">
+    <p>You don't need another generic program. You've already tried one.</p>
+    <p>The snatch and the clean and jerk are two of the most technical movements in all of strength sport. Learning them alone isn't slow — it's how good people get hurt, or quit in week three.</p>
+    <p>You're not behind. You just haven't had a guide yet.</p>
+    <p>I'm not here to be impressive. I'm here to hand you the map I wish someone had handed me.</p>
+    <p>Quiz is in the bio if you want to know where you're starting from.</p>
+    <p class="tags">#olympicweightlifting #weightlifting #dangermanowl #myriadweightlifting</p>
+  </div>
+
+  <h4>Reel 3 — "Not Behind" caption</h4>
+  <div class="caption">
+    <p>You're not behind.</p>
+    <p>You just haven't had a guide yet.</p>
+    <p>Find your phase — link in bio.</p>
+    <p class="tags">#olympicweightlifting #weightlifting #dangermanowl #myriadweightlifting</p>
+  </div>
+
+  <h4>Posting order</h4>
+  <div class="tbl-scroll">
+  <table>
+    <thead><tr><th>Day</th><th>Post</th><th>Why this order</th></tr></thead>
+    <tbody>
+      <tr><td>Day 1</td><td>Reel 1 — Week Four</td><td>Strongest hook. Post it when your audience is largest.</td></tr>
+      <tr><td>Day 4</td><td>Reel 3 — Not Behind</td><td>Six seconds. High completion rate, which teaches the algorithm to trust the account.</td></tr>
+      <tr><td>Day 7</td><td>Reel 2 — The Map</td><td>Slowest burn of the three. Give it its own week.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p class="note">Watch which one gets saved and shared most, not which gets the most views. Saves on funnel content mean someone intends to come back — that's the closest free signal you have to intent, and it tells you which creative to put the paid money behind.</p>
+</section>
+
+<!-- ===== UPLOAD ===== -->
+<section>
+  <h2><span class="num">06</span> Uploading them as ads</h2>
+  <div class="h2rule"></div>
+
+  <div class="fields">
+<span class="k">Visibility   </span>Unlisted  <span class="cm"># ads run fine unlisted; keeps your channel clean</span>
+<span class="k">Titles       </span>AD | Week Four | 30s
+<span class="k">             </span>AD | The Map | 15s
+<span class="k">             </span>AD | Not Behind | 6s bumper
+<span class="k">             </span><span class="cm"># nobody sees these titles, but you'll thank yourself in the reports</span>
+<span class="k">Ad name      </span>YT-WeekFour-30-v1   <span class="cm"># version the name, you'll iterate</span>
+<span class="k">Final URL    </span>the quiz URL + utm_content=week-four / the-map / bumper
+<span class="k">CTA button   </span>Find your phase     <span class="cm"># 10 char limit — this fits exactly</span>
+<span class="k">Headline     </span>You're not behind   <span class="cm"># 15 char limit</span>
+  </div>
+
+  <p>Upload the separate organic cuts as public posts with their own titles — don't reuse the unlisted ad files. The ad versions carry the end card, and you want the organic ones to keep their own watch history.</p>
+</section>
+
+<footer>
+  <p>Companion to <strong>The First Thirty Dollars</strong> — the Google Ads and YouTube launch plan. Scripts written in the funnel voice from the Learn to Lift Hero's Journey framework: the viewer is the hero, the coach is the guide, one low-friction CTA, no pressure.</p>
+</footer>
+
+</div>
